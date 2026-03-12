@@ -459,6 +459,13 @@ section {
     font-weight: 700;
 }
 
+.offer-card .price-display {
+    margin: 40px auto 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .offer-card .price-symbol {
     color: #000;
 }
