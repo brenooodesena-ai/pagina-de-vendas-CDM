@@ -423,40 +423,72 @@ section {
 .offer-card {
     max-width: 650px;
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid var(--c-gold);
-    padding: 80px 50px; /* Adjusted padding after badge removal */
+    background: var(--grad-gold); /* Solid Gold Gradient */
+    border: none;
+    padding: 60px 40px;
     border-radius: 24px;
-    backdrop-filter: blur(25px);
-    animation: card-glow 4s ease-in-out infinite;
+    box-shadow: 0 30px 100px rgba(212, 175, 55, 0.3);
+    position: relative;
+    overflow: hidden;
 }
 
-.offer-card h2 {
-    font-size: 3rem;
-    font-weight: 700; /* Bolder */
-    letter-spacing: -0.04em;
-    margin-bottom: 45px;
+.offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.1"/></svg>');
+    opacity: 0.15;
+    pointer-events: none;
 }
 
-.price-display {
-    margin: 40px auto 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.old-price {
-    text-decoration: line-through;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 1.2rem;
-}
-
-.price-cash {
-    font-size: 1.25rem;
-    color: var(--c-off-white);
-    margin-top: 25px;
-    opacity: 0.9;
+.offer-card .old-price {
+    color: rgba(0, 0, 0, 0.6);
     font-weight: 500;
+}
+
+.offer-card .currency {
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+}
+
+.offer-card .installment-text {
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 700;
+}
+
+.offer-card .price-symbol {
+    color: #000;
+}
+
+.offer-card .main-price {
+    color: #000;
+    letter-spacing: -0.05em;
+}
+
+.offer-card .price-cash {
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+/* Button override inside gold card for contrast */
+.offer-card .btn-main {
+    background: #000;
+    color: var(--c-gold);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.offer-card .btn-main:hover {
+    background: #111;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+}
+
+.offer-card .safe-checkout {
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 25px;
 }
 
 .price-main-wrapper {
