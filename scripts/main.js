@@ -59,24 +59,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Magnetic Button Effect
-    const magneticBtns = document.querySelectorAll('.btn-main');
-    magneticBtns.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-
-            // Subtle movement: max 15px
-            const strength = 15; 
-            const moveX = (x / rect.width) * strength;
-            const moveY = (y / rect.height) * strength;
-
-            btn.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        });
-
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = `translate(0px, 0px)`;
-        });
-    });
 });

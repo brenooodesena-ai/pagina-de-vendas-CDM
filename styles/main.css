@@ -571,8 +571,9 @@ section {
 }
 
 .offer-card .safe-checkout {
-    color: rgba(0, 0, 0, 0.5);
+    color: #FFF; /* High visibility on black */
     margin-top: 25px;
+    opacity: 0.8;
 }
 
 .price-main-wrapper {
