@@ -605,7 +605,7 @@ section {
     font-size: 1.1rem;
     font-style: italic;
     letter-spacing: 0.02em;
-    margin-bottom: 28px;
+    margin-bottom: 50px; /* Space so text sits above the arrow */
     line-height: 1.6;
 }
 
