@@ -450,15 +450,13 @@ section {
 }
 
 .offer-card .currency {
-    color: #FFF;
+    color: rgba(0, 0, 0, 0.8);
     font-weight: 600;
-    -webkit-text-stroke: 1px #000;
 }
 
 .offer-card .installment-text {
-    color: #FFF;
-    font-weight: 800;
-    -webkit-text-stroke: 1px #000;
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 700;
 }
 
 .offer-card .price-display {
@@ -469,65 +467,29 @@ section {
 }
 
 .offer-card .price-symbol {
-    color: #FFF;
-    -webkit-text-stroke: 1.5px #000;
+    color: #000;
 }
 
 .offer-card .main-price {
-    color: #FFF;
+    color: #000;
     letter-spacing: -0.05em;
-    -webkit-text-stroke: 2px #000;
 }
 
 .offer-card .price-cash {
-    color: #FFF;
-    font-weight: 800;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 700;
     margin-top: 15px;
-    -webkit-text-stroke: 1px #000;
 }
 
 /* Button override inside gold card for contrast */
-@keyframes gold-shine {
-    0% { left: -100%; }
-    20% { left: 100%; }
-    100% { left: 100%; }
-}
-
 .offer-card .btn-main {
     background: #000;
-    color: #FFF;
+    color: var(--c-gold);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    position: relative;
-    -webkit-text-stroke: 1px #000;
-}
-
-.offer-card .btn-main::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(212, 175, 55, 0.4),
-        transparent
-    );
-    animation: gold-shine 4s infinite linear;
-    z-index: 1;
-}
-
-.offer-card .btn-main .btn-content {
-    position: relative;
-    z-index: 2;
-    font-weight: 900;
 }
 
 .offer-card .btn-main:hover {
     background: #111;
-    transform: scale(1.05) translateY(-5px);
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
 }
 
