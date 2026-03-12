@@ -601,17 +601,18 @@ section {
 }
 
 .offer-cta-subtext {
-    color: rgba(255, 255, 255, 0.65);
-    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9); /* Bright and visible */
+    font-size: 1.4rem;
+    font-weight: 500;
     font-style: italic;
     letter-spacing: 0.02em;
-    margin-bottom: 50px; /* Space so text sits above the arrow */
+    margin-bottom: 80px; /* More space above the arrow */
     line-height: 1.6;
 }
 
 .offer-cta-subtext .highlight-text {
     font-style: normal;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .price-main-wrapper {
