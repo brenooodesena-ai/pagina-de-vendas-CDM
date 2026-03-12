@@ -423,13 +423,13 @@ section {
 .offer-card {
     max-width: 600px;
     margin: 60px auto 0;
-    background: #F2EDE4; /* Reference beige */
-    border: none;
+    background: #0A0A0A; /* Premium Matte Black */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Discrete border */
     padding: 80px 40px 60px;
     border-radius: 35px;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
     position: relative;
-    overflow: visible; /* To allow the indicator to pop out */
+    overflow: visible;
 }
 
 /* Remove noise texture as it's not in the image */
@@ -477,22 +477,22 @@ section {
 }
 
 .offer-card .old-price {
-    color: #666;
+    color: #999;
     font-size: 2.2rem;
     font-weight: 400;
     text-decoration: line-through;
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .offer-card .por-apenas {
-    color: #1A1A1A;
+    color: #FFF;
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
 .offer-card .main-price {
-    color: #C69C6D; /* Brownish gold from image */
+    color: var(--c-gold); /* Back to brand gold */
     font-size: clamp(5rem, 10vw, 8.5rem);
     line-height: 0.9;
     font-weight: 700;
@@ -500,21 +500,21 @@ section {
 }
 
 .offer-card .price-symbol {
-    color: #C69C6D;
+    color: var(--c-gold);
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
     margin-right: 5px;
 }
 
 .offer-card .installment-text {
-    color: #1A1A1A;
+    color: #FFF;
     font-size: 2.2rem;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .offer-card .price-cash {
-    color: #444;
+    color: #CCC;
     font-size: 2.2rem;
     font-weight: 400;
     margin-top: 20px;
@@ -522,7 +522,7 @@ section {
 
 .offer-card .price-cash span {
     font-weight: 800;
-    color: #1A1A1A;
+    color: #FFF;
 }
 
 .offer-card .price-note {
@@ -532,18 +532,18 @@ section {
     font-size: 1.1rem;
 }
 
-/* Reference Image Pill Button */
+/* Dark Mode High-Impact Button */
 .offer-card .btn-main {
-    background: linear-gradient(to right, #F9D4A8, #F7B174);
-    color: #1A1A1A;
+    background: var(--grad-gold);
+    color: #000;
     padding: 22px 60px;
-    border-radius: 100px; /* Pill shape */
+    border-radius: 100px;
     font-weight: 800;
     font-size: 1.4rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 40px;
-    box-shadow: 0 15px 40px rgba(247, 177, 116, 0.3);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
     border: none;
     width: 100%;
     max-width: 500px;
@@ -551,14 +551,15 @@ section {
 
 .offer-card .btn-main:hover {
     transform: scale(1.03) translateY(-3px);
-    box-shadow: 0 20px 50px rgba(247, 177, 116, 0.5);
-    background: linear-gradient(to right, #fae0c1, #f9bf8f);
+    box-shadow: 0 20px 50px rgba(212, 175, 55, 0.5);
+    background: var(--grad-gold);
+    filter: brightness(1.1);
 }
 
 .trust-footer {
     margin-top: 45px;
     padding-top: 30px;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .payment-methods {
