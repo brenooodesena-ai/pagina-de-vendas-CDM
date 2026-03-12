@@ -1,0 +1,49 @@
+// Core JS v4.0 - CDM Performance
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('CDM v4.0 Initialized');
+
+    // Reveal on Scroll Engine
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // Mobile Check & Optimization
+    const handleResize = () => {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    // FAQ Accordion Logic
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const faqItem = button.parentElement;
+            const isOpen = faqItem.classList.contains('open');
+
+            // Close all other items (optional, but requested frequently for 'exclusive' feel)
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('open');
+            });
+
+            // Toggle current item
+            if (!isOpen) {
+                faqItem.classList.add('open');
+            }
+        });
+    });
+});
