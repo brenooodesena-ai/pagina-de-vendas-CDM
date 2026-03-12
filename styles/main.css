@@ -155,26 +155,13 @@ body {
     100% { left: 100%; }
 }
 
-/* Dynamic Headline Shimmer */
-@keyframes text-shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-}
-
 .headline {
     font-size: clamp(2.6rem, 5.5vw, 4.8rem);
     font-weight: 600; /* Matching reference image weight */
     line-height: 1.1;
     letter-spacing: -0.03em;
     margin-bottom: 25px;
-    
-    background: linear-gradient(110deg, #fff 40%, rgba(255,255,255,0.4) 50%, #fff 60%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: text-shimmer 6s linear infinite;
-    display: inline-block;
+    color: var(--c-white);
 }
 
 .highlight-text {
@@ -391,40 +378,13 @@ section {
 }
 
 .benefit-card {
-    background: rgba(255, 255, 255, 0.02);
+    background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.05);
     padding: 60px 45px;
-    border-radius: 20px;
-    backdrop-filter: blur(15px);
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    position: relative;
-    overflow: hidden;
-    /* Inner Glow (Elite Glassmorphism) */
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-}
-
-/* Mouse-following Internal Light */
-.benefit-card::after, .access-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
-        rgba(212, 175, 55, 0.08),
-        transparent 40%
-    );
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.benefit-card:hover::after, .access-card:hover::after {
-    opacity: 1;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: var(--transition-v5);
+    text-align: left;
 }
 
 .benefit-card:hover {
@@ -588,17 +548,15 @@ section {
 }
 
 /* Animations Engine */
-/* Animations Engine - Refined for Elite Cascading */
 .reveal {
     opacity: 0;
-    transform: translateY(40px) scale(0.98);
-    transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1), transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
-    will-change: transform, opacity;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1), transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .reveal.active {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
 }
 
 .footer {
@@ -885,28 +843,19 @@ section {
 
 .access-card {
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 60px 40px;
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    padding: 40px 30px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    transition: var(--transition-v5);
     text-align: center;
-    /* Inner Glow (Elite Glassmorphism) */
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
 }
 
 .access-card:hover {
     background: rgba(255, 255, 255, 0.04);
     border-color: rgba(212, 175, 55, 0.3);
-    transform: translateY(-8px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.05);
 }
 
 .access-icon {
