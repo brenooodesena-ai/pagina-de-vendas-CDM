@@ -423,13 +423,27 @@ section {
 .offer-card {
     max-width: 600px;
     margin: 60px auto 0;
-    background: #0A0A0A; /* Premium Matte Black */
+    background: linear-gradient(135deg, #0A0A0A, #111111); /* Matte, frosted black */
     border: 1px solid rgba(255, 255, 255, 0.05); /* Discrete border */
     padding: 80px 40px 60px;
     border-radius: 35px;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 0 30px rgba(255,255,255,0.05), 0 40px 100px rgba(0, 0, 0, 0.6); /* Inner glow for depth */
     position: relative;
     overflow: visible;
+}
+
+/* Corner light accents */
+.offer-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 60%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 60%),
+        radial-gradient(circle at bottom left, rgba(255,255,255,0.12), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.12), transparent 60%);
+    border-radius: inherit;
 }
 
 /* Remove noise texture as it's not in the image */
