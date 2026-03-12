@@ -423,11 +423,11 @@ section {
 .offer-card {
     max-width: 650px;
     margin: 0 auto;
-    background: var(--grad-gold); /* Solid Gold Gradient */
+    background: #FFFFFF; /* High-contrast white */
     border: none;
     padding: 60px 40px;
     border-radius: 24px;
-    box-shadow: 0 30px 100px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
 }
