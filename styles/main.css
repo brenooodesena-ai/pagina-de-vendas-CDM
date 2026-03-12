@@ -250,6 +250,11 @@ section {
     padding-top: 100px;
 }
 
+/* Bring pricing section flush with section above */
+#pricing-v5 {
+    padding-top: 40px;
+}
+
 /* Header & Pillars */
 .header {
     position: absolute;
@@ -422,7 +427,7 @@ section {
 
 .offer-card {
     max-width: 600px;
-    margin: 20px auto 0;
+    margin: 0 auto 0;
     background: #0A0A0A; /* Premium Matte Black */
     border: 1px solid rgba(212, 175, 55, 0.15); /* Subtle gold border */
     padding: 80px 40px 60px;
