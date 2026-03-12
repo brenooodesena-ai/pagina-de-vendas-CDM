@@ -21,12 +21,18 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
 body {
     background-color: var(--c-matte);
     font-family: var(--f-main);
     color: var(--c-white);
     letter-spacing: var(--ls-compact);
     overflow-x: hidden;
+    max-width: 100%;
     overscroll-behavior-y: none; /* Prevents bounce at ends */
 }
 
