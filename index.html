@@ -6,15 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caminho Digital Master | Maestria Digital</title>
 
-    <!-- Google Fonts: Outfit -->
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./styles/main.css">
 </head>
 
 <body>
+    <!-- Preloader Premium CDM -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">CDM<span>.</span></div>
+            <div class="preloader-bar">
+                <div class="preloader-progress"></div>
+            </div>
+        </div>
+    </div>
     <!-- Fundo de Extrema Precisão v6.0 (Zero Azul, Total Dourado) -->
     <div class="fixed-bg-grid">
         <div class="noise-layer"></div>
@@ -46,8 +55,10 @@
                 </div>
             </section>
 
-            <!-- Grid de Benefícios -->
+            <!-- Benefits Section -->
             <section id="benefits-v5">
+                <div class="ambient-light light-gold" style="top: 10%; left: -10%; width: 50vw; height: 50vh; opacity: 0.3;"></div>
+                <div class="ambient-light light-gold" style="bottom: 0px; right: 0px; width: 40vw; height: 40vh; opacity: 0.2;"></div>
                 <div class="container">
                     <div class="benefits-grid">
                         <div class="benefit-card reveal">
@@ -69,24 +80,161 @@
                 </div>
             </section>
 
+            <!-- Showcase de Módulos (Arts 320x480) -->
+            <section id="modules-v5">
+                <div class="container text-center reveal" style="margin-bottom: 35px;">
+                    <h2 class="headline" style="font-size: clamp(2.5rem, 6vw, 4.2rem); margin-bottom: 15px;">
+                        Conteúdo <span class="highlight-text">Exclusivo</span>
+                    </h2>
+                    <div class="module-badge" style="margin-bottom: 0;">
+                        <span class="gold-dot"></span>
+                        Explore o que te espera dentro do curso
+                    </div>
+                </div>
+                
+                <div class="modules-container">
+                    <div class="modules-track">
+                        <!-- 1 a 16 -->
+                        <div class="module-card"><img src="./assets/modules/modulo-01.png" alt="Módulo 01" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-02.png" alt="Módulo 02" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-03.png" alt="Módulo 03" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-04.png" alt="Módulo 04" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-05.png" alt="Módulo 05" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-06.png" alt="Módulo 06" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-07.png" alt="Módulo 07" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-08.png" alt="Módulo 08" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-09.png" alt="Módulo 09" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-10.png" alt="Módulo 10" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-11.png" alt="Módulo 11" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-12.png" alt="Módulo 12" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-13.png" alt="Módulo 13" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-14.png" alt="Módulo 14" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-15.png" alt="Módulo 15" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-16.png" alt="Módulo 16" loading="lazy"></div>
+                        
+                        <!-- Duplicatas para Loop Infinito -->
+                        <div class="module-card"><img src="./assets/modules/modulo-01.png" alt="Módulo 01" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-02.png" alt="Módulo 02" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-03.png" alt="Módulo 03" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-04.png" alt="Módulo 04" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-05.png" alt="Módulo 05" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-06.png" alt="Módulo 06" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-07.png" alt="Módulo 07" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-08.png" alt="Módulo 08" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-09.png" alt="Módulo 09" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-10.png" alt="Módulo 10" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-11.png" alt="Módulo 11" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-12.png" alt="Módulo 12" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-13.png" alt="Módulo 13" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-14.png" alt="Módulo 14" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-15.png" alt="Módulo 15" loading="lazy"></div>
+                        <div class="module-card"><img src="./assets/modules/modulo-16.png" alt="Módulo 16" loading="lazy"></div>
+                    </div>
+                </div>
+            </section>
+            <!-- Seção: Sobre Mim -->
+            <section id="about-v5">
+                <div class="ambient-light light-gold" style="top: -100px; left: 50%; transform: translateX(-50%); width: 80vw; height: 400px; opacity: 0.3; filter: blur(120px);"></div>
+                <div class="ambient-light light-gold" style="bottom: 10%; right: -10%; width: 40vw; height: 40vh; opacity: 0.2;"></div>
+                
+                <div class="container">
+                    <div class="about-grid">
+                        <div class="about-image-container reveal">
+                            <div class="image-caption">Fundador & Mentor</div>
+                            <div class="about-image-wrapper">
+                                <img src="./assets/profile.jpg" alt="Fundador" loading="lazy">
+                            </div>
+                            <div class="image-glow"></div>
+                        </div>
+                        <div class="about-content reveal">
+                            <span class="section-label">SOBRE MIM</span>
+                            <h2 class="headline">Prazer, me chamo <br><span class="highlight-text">Breno Sena</span></h2>
+                            <div class="story-text">
+                                <p>Minha jornada começou como a de muitos: tentando decifrar o código complexo de como gerar resultados reais na internet. Foram anos de testes, erros e aprendizados em silêncio.</p>
+                                <p>Hoje, meu propósito é encurtar esse caminho para você. O Caminho Digital Master não é apenas um curso, é a destilação de toda a minha experiência prática em um método escalável.</p>
+                                <p>Estou aqui para garantir que você não cometa os mesmos erros que eu, e que avance com a segurança de quem tem um mapa comprovado nas mãos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção: O que você terá acesso -->
+            <section id="access-v5">
+                <div class="ambient-light light-gold" style="top: 10%; left: 0%; width: 100vw; height: 50vh; opacity: 0.15; filter: blur(150px);"></div>
+                <!-- Ambient Glows (Fundo Profissional) -->
+                <div class="ambient-glow glow-pos-1"></div>
+                <div class="ambient-glow glow-pos-2"></div>
+                
+                <div class="container" style="position: relative; z-index: 2;">
+                    <div class="text-center reveal" style="margin-bottom: 60px;">
+                        <h2 class="headline" style="font-size: clamp(2rem, 5vw, 3.5rem);">
+                            Tudo o que você <span class="highlight-text">recebe</span>
+                        </h2>
+                    </div>
+
+                    <div class="access-grid reveal">
+                        <div class="access-card">
+                            <div class="access-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l3.5 13"/><path d="M13 3l3 6-3.5 13"/><path d="M2 9h20"/></svg>
+                            </div>
+                            <h3>Mentoria Semanal</h3>
+                            <p>Encontros ao vivo para tirar dúvidas, analisar estratégias e acelerar seu progresso com quem já trilhou o caminho.</p>
+                            <div class="access-value">R$ 997,00</div>
+                        </div>
+                        <div class="access-card">
+                            <div class="access-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.5-1 1-4c1.5 0 3 .5 3 .5L12 9"/><path d="M15 12v5c0 1.5 0 3-4 3l-3-3s.5-1.5.5-3c0-1 2-2 2-2l3-3"/></svg>
+                            </div>
+                            <h3>Caminho Digital Master</h3>
+                            <p>Um método estratégico que revela como o mercado digital realmente funciona e mostra, passo a passo, o caminho mais inteligente para quem quer sair do zero e construir uma estrutura sólida para gerar resultados.</p>
+                            <div class="access-value">R$ 297,00</div>
+                        </div>
+                        <div class="access-card">
+                            <div class="access-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <h3>Comunidade VIP</h3>
+                            <p>Networking de alto nível com outros players que estão no mesmo jogo que você.</p>
+                            <div class="access-value">R$ 97,00</div>
+                        </div>
+                    </div>
+
+                    <div class="access-total reveal">
+                        Valor total de R$ 566,90
+                    </div>
+                </div>
+            </section>
+
             <!-- CTA / Oferta Section -->
             <section id="pricing-v5">
                 <div class="container text-center">
                     <div class="offer-card reveal">
-                        <span class="offer-badge">OPORTUNIDADE ÚNICA</span>
-                        <h2>Maestria Digital</h2>
+                        <h2>Caminho Digital Master</h2>
                         <div class="price-display">
-                            <span class="old-price">R$ 1.997,00</span>
-                            <span class="currency">12x de</span>
-                            <span class="main-price">R$ 97,41</span>
+                            <div style="margin-bottom: 25px;">
+                                <span class="old-price" style="display: inline-block; margin-bottom: 0;">De R$ 597,00</span>
+                                <span class="currency" style="display: inline-block; margin-left: 5px;">por apenas</span>
+                            </div>
+                            <div class="price-main-wrapper">
+                                <div class="price-symbol-stack">
+                                    <div class="installment-text">5x de</div>
+                                    <span class="price-symbol">R$</span>
+                                </div>
+                                <span class="main-price">43,62</span>
+                            </div>
+                            <div class="price-cash">ou R$ 197,00 à vista</div>
                         </div>
-                        <a href="#" class="btn-main glow">Garantir Meu Acesso</a>
+                        <a href="#" class="btn-main glow">
+                            <span class="btn-content">Garantir Meu Acesso</span>
+                        </a>
                         <p class="safe-checkout">compra 100% segura • acesso imediato</p>
                     </div>
                 </div>
             </section>
-            <!-- FAQ Section -->
+            <!-- FAQ Style Section -->
             <section id="faq-v5">
+                <div class="ambient-light light-gold" style="bottom: -10%; left: -10%; width: 60vw; height: 60vh; opacity: 0.2;"></div>
                 <div class="container">
                     <div class="text-center reveal" style="margin-bottom: 60px;">
                         <h2 class="headline" style="font-size: clamp(2rem, 5vw, 3.5rem);">
