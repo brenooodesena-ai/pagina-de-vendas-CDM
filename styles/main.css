@@ -644,7 +644,7 @@ section {
     font-style: italic;
     letter-spacing: 0.02em;
     margin-top: 0px; /* Reset top margin since it is inside a new section with padding */
-    margin-bottom: 5px; /* Leave exactly enough space (approx 5-10px) so the tail bridges the gap to the circle */
+    margin-bottom: 15px; /* Leave enough space so the circle (offset -25px) overlaps exactly 10px of the badge bottom edge without touching text */
     position: relative;
     z-index: 5; /* Lower than offer-top-indicator (z-index 10) so the circle sits ON TOP of the badge */
     line-height: 1.6;
@@ -660,22 +660,6 @@ section {
     border: 1px solid rgba(212, 175, 55, 0.2);
     padding: 15px clamp(15px, 5vw, 30px); /* Restore normal padding */
     border-radius: 60px; /* Classic pill shape */
-}
-
-/* Callout Tail (pointing down to the circle) */
-.offer-cta-subtext::after {
-    content: '';
-    position: absolute;
-    bottom: -15px; /* Drop below the badge */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    /* Create a downward pointing triangle */
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-top: 15px solid rgba(212, 175, 55, 0.15); /* Match the background tint but slightly stronger so it's visible over the black gap */
-    z-index: -1; /* Keep it behind the circle indicator */
 }
 
 .offer-cta-subtext .highlight-text {
