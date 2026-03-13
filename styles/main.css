@@ -644,6 +644,7 @@ section {
     margin-top: 15px; /* Spacing from the "Mas hoje..." text */
     margin-bottom: 60px; /* Spacing above the arrow indicator */
     line-height: 1.6;
+    text-align: center;
 }
 
 .offer-cta-subtext .highlight-text {
