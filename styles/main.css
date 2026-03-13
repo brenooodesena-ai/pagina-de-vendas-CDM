@@ -435,14 +435,25 @@ section {
     text-align: center;
 }
 
-/* Fading Gold Divider Line */
+/* Fading Gold Divider Line Container */
+.separator-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The Line Itself */
 .gold-fade-line {
     width: 100%;
     max-width: 800px;
-    margin: 30px auto;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6), transparent);
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    position: relative;
+    z-index: 1; /* Keeps line above the light */
 }
 
 /* Offer Card */
