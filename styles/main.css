@@ -261,6 +261,14 @@ section {
     padding-top: 40px;
 }
 
+/* Linha de Separação Padrão (Igual aos Módulos) */
+.section-divider {
+    width: 80%;
+    margin: 40px auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+}
+
 /* Header & Pillars */
 .header {
     position: absolute;
