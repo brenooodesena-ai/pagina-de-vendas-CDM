@@ -637,7 +637,9 @@ section {
 
 .offer-cta-subtext {
     color: rgba(255, 255, 255, 0.9); /* Bright and visible */
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 3.2vw, 1.4rem); /* Responsive size to fit in 2 lines */
+    width: 95%; /* Keep the pill wide */
+    max-width: 650px;
     font-weight: 500;
     font-style: italic;
     letter-spacing: 0.02em;
@@ -650,7 +652,7 @@ section {
     display: inline-block;
     background: rgba(212, 175, 55, 0.05);
     border: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 12px 30px;
+    padding: 15px clamp(15px, 5vw, 30px);
     border-radius: 100px;
 }
 
