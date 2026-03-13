@@ -644,7 +644,7 @@ section {
     font-style: italic;
     letter-spacing: 0.02em;
     margin-top: 0px; /* Reset top margin since it is inside a new section with padding */
-    margin-bottom: -40px; /* Pull badge down exactly to connect with the top of the arrow circle */
+    margin-bottom: 0px; /* Touching the offer card below to perfectly split the circle */
     position: relative;
     z-index: 5; /* Lower than offer-top-indicator (z-index 10) so the circle sits ON TOP of the badge */
     line-height: 1.6;
