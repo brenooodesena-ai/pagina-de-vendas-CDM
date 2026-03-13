@@ -550,7 +550,7 @@ section {
 
 .offer-card .main-price {
     color: var(--c-gold); /* Back to brand gold */
-    font-size: clamp(5rem, 10vw, 8.5rem);
+    font-size: clamp(4rem, 8vw, 6.5rem); /* Reduced from 5rem - 8.5rem */
     line-height: 0.9;
     font-weight: 700;
     letter-spacing: -0.05em;
@@ -558,14 +558,14 @@ section {
 
 .offer-card .price-symbol {
     color: var(--c-gold);
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem); /* Reduced from 2.5rem - 4rem */
     font-weight: 700;
     margin-right: 5px;
 }
 
 .offer-card .installment-text {
     color: #FFF;
-    font-size: 1.4rem; /* Smaller font size as requested */
+    font-size: 1.1rem; /* Reduced from 1.4rem */
     font-weight: 700;
     text-transform: uppercase;
 }
