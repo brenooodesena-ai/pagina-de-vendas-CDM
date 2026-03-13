@@ -644,7 +644,7 @@ section {
     font-style: italic;
     letter-spacing: 0.02em;
     margin-top: 0px; /* Reset top margin since it is inside a new section with padding */
-    margin-bottom: 0px; /* Touching the offer card below to perfectly split the circle */
+    margin-bottom: 5px; /* Leave exactly enough space (approx 5-10px) so the tail bridges the gap to the circle */
     position: relative;
     z-index: 5; /* Lower than offer-top-indicator (z-index 10) so the circle sits ON TOP of the badge */
     line-height: 1.6;
@@ -656,11 +656,26 @@ section {
     margin-right: auto;
     
     /* Professional Badge Styles */
-    background: rgba(212, 175, 55, 0.05);
+    background: rgba(212, 175, 55, 0.05); /* Slightly visible background */
     border: 1px solid rgba(212, 175, 55, 0.2);
-    /* Extra padding at the bottom (40px instead of 15px) to create an "empty space" so the overlapping circle does not cover the text */
-    padding: 15px clamp(15px, 5vw, 30px) 40px clamp(15px, 5vw, 30px);
-    border-radius: 60px; /* Adjusted slightly so the pill shape remains smooth with the taller height */
+    padding: 15px clamp(15px, 5vw, 30px); /* Restore normal padding */
+    border-radius: 60px; /* Classic pill shape */
+}
+
+/* Callout Tail (pointing down to the circle) */
+.offer-cta-subtext::after {
+    content: '';
+    position: absolute;
+    bottom: -15px; /* Drop below the badge */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    /* Create a downward pointing triangle */
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid rgba(212, 175, 55, 0.15); /* Match the background tint but slightly stronger so it's visible over the black gap */
+    z-index: -1; /* Keep it behind the circle indicator */
 }
 
 .offer-cta-subtext .highlight-text {
