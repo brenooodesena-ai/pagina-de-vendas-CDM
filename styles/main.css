@@ -258,8 +258,9 @@ section {
 
 /* Bring pricing section flush with section above */
 #pricing-v5 {
-    padding-top: 40px;
+    padding-top: 0;
 }
+
 
 /* Linha de Separação Padrão (Igual aos Módulos) */
 .section-divider {
@@ -435,13 +436,14 @@ section {
 .value-transition-text {
     font-size: 0.95rem; /* Small font size */
     color: rgba(255, 255, 255, 0.6); /* Reduced emphasis */
-    margin-top: 8px; /* Very close to the Valor total */
-    margin-bottom: 0px; 
+    margin-top: 0 !important; /* Reduced from 8px to bring it closer to Valor total */
+    margin-bottom: 0 !important; 
     font-weight: 400; /* Normal weight */
     text-transform: none; /* No uppercase */
     letter-spacing: normal;
     text-align: center;
 }
+
 
 /* Fading Gold Divider Line */
 .gold-fade-line {
@@ -644,7 +646,7 @@ section {
     font-weight: 500;
     font-style: italic;
     letter-spacing: 0.02em;
-    margin-top: 0px; /* Reset top margin since it is inside a new section with padding */
+    margin-top: 30px !important; 
     margin-bottom: 15px; /* Leave enough space so the circle (offset -25px) overlaps exactly 10px of the badge bottom edge without touching text */
     position: relative;
     z-index: 5; /* Lower than offer-top-indicator (z-index 10) so the circle sits ON TOP of the badge */
@@ -662,6 +664,7 @@ section {
     padding: 15px clamp(15px, 5vw, 30px); /* Restore normal padding */
     border-radius: 60px; /* Classic pill shape */
 }
+
 
 .offer-cta-subtext .highlight-text {
     font-style: normal;
@@ -986,10 +989,11 @@ section {
 }
 
 #access-v5 {
-    padding: 140px 0;
+    padding: 140px 0 0;
     position: relative;
     overflow: visible; /* CRITICAL: Allow lights to bleed out without lines */
 }
+
 
 /* Refined Ambient Light for Background - Ultra Soft */
 .ambient-glow {
