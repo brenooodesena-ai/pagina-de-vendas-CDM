@@ -593,14 +593,15 @@ section {
 
 /* Dark Mode High-Impact Button */
 .offer-card .btn-main {
-    background: var(--grad-gold);
+    background: linear-gradient(135deg, #FFF 0%, #D4AF37 40%, rgba(212, 175, 55, 0.8) 100%);
     color: #000;
     padding: 22px 60px;
     border-radius: 100px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-weight: 800;
     font-size: 1.4rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     margin-top: 40px;
     box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
     border: none;
@@ -611,7 +612,7 @@ section {
 .offer-card .btn-main:hover {
     transform: scale(1.03) translateY(-3px);
     box-shadow: 0 20px 50px rgba(212, 175, 55, 0.5);
-    background: var(--grad-gold);
+    background: linear-gradient(135deg, #FFF 0%, #E8CD78 40%, #D4AF37 100%);
     filter: brightness(1.1);
 }
 
