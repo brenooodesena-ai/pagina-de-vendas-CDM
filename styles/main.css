@@ -641,8 +641,8 @@ section {
     font-weight: 500;
     font-style: italic;
     letter-spacing: 0.02em;
-    margin-top: 10px;
-    margin-bottom: 30px; /* Reduced space since it is now inside the card */
+    margin-top: 15px; /* Spacing from the "Mas hoje..." text */
+    margin-bottom: 60px; /* Spacing above the arrow indicator */
     line-height: 1.6;
 }
 
