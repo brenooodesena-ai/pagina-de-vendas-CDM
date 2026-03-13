@@ -645,6 +645,13 @@ section {
     margin-bottom: 60px; /* Spacing above the arrow indicator */
     line-height: 1.6;
     text-align: center;
+    
+    /* Professional Badge Styles */
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 12px 30px;
+    border-radius: 100px;
 }
 
 .offer-cta-subtext .highlight-text {
