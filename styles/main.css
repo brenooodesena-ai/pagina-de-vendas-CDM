@@ -506,24 +506,29 @@ section {
 .offer-card .price-header {
     margin-bottom: 5px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Change to row to keep on same line */
     align-items: center;
-    gap: 15px;
+    justify-content: center;
+    gap: 8px; /* Closer gap */
 }
 
 .offer-card .old-price {
     color: #999;
-    font-size: 2.2rem;
-    font-weight: 400;
+    font-size: 1.4rem; /* Slightly smaller to fit side-by-side */
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.offer-card .old-price .strike {
     text-decoration: line-through;
-    opacity: 0.7;
 }
 
 .offer-card .por-apenas {
-    color: #FFF;
-    font-size: 2rem;
+    color: var(--c-gold); /* Gold color for emphasis */
+    font-size: 1.4rem; /* Match size */
     font-weight: 700;
-    letter-spacing: 1px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .offer-card .main-price {
