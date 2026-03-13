@@ -658,10 +658,9 @@ section {
     /* Professional Badge Styles */
     background: rgba(212, 175, 55, 0.05);
     border: 1px solid rgba(212, 175, 55, 0.2);
-    /* Extra padding at the bottom to hold the circle, and slightly more on top to balance */
-    padding: 25px clamp(15px, 5vw, 30px) 45px clamp(15px, 5vw, 30px);
-    /* The magic shape: tight rounded top corners, huge bottom radius making the sides sweep inwards and downwards towards the circle */
-    border-radius: 24px 24px 150px 150px;
+    /* Extra padding at the bottom (40px instead of 15px) to create an "empty space" so the overlapping circle does not cover the text */
+    padding: 15px clamp(15px, 5vw, 30px) 40px clamp(15px, 5vw, 30px);
+    border-radius: 60px; /* Adjusted slightly so the pill shape remains smooth with the taller height */
 }
 
 .offer-cta-subtext .highlight-text {
