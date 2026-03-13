@@ -425,10 +425,13 @@ section {
 }
 
 .value-transition-text {
-    font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 15px;
-    font-weight: 500;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9); /* Brighter for emphasis */
+    margin-bottom: 20px; /* Space between this and subtext */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
 }
 
 /* Offer Card */
