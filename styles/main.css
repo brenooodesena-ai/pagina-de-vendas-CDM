@@ -639,7 +639,8 @@ section {
     font-weight: 500;
     font-style: italic;
     letter-spacing: 0.02em;
-    margin-bottom: 80px; /* More space above the arrow */
+    margin-top: 10px;
+    margin-bottom: 30px; /* Reduced space since it is now inside the card */
     line-height: 1.6;
 }
 
