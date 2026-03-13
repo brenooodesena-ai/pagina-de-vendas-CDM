@@ -527,7 +527,6 @@ section {
     color: var(--c-gold); /* Gold color for emphasis */
     font-size: 1.4rem; /* Match size */
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
@@ -548,7 +547,7 @@ section {
 
 .offer-card .installment-text {
     color: #FFF;
-    font-size: 2.2rem;
+    font-size: 1.4rem; /* Smaller font size as requested */
     font-weight: 700;
     text-transform: uppercase;
 }
