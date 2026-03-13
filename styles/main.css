@@ -663,7 +663,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: flex-end; /* Align numbers to base */
-    gap: 15px;
+    gap: 5px; /* Reduced gap to bring price closer to R$ */
 }
 
 .price-symbol-stack {
