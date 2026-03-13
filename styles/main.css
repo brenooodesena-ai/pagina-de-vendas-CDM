@@ -644,18 +644,23 @@ section {
     font-style: italic;
     letter-spacing: 0.02em;
     margin-top: 0px; /* Reset top margin since it is inside a new section with padding */
-    margin-bottom: -25px; /* Pull badge down exactly to connect with the top of the arrow circle (-25px offset) */
+    margin-bottom: -40px; /* Pull badge down exactly to connect with the top of the arrow circle */
     position: relative;
-    z-index: 15; /* Ensure it stays above the line but connects with the circle */
+    z-index: 5; /* Lower than offer-top-indicator (z-index 10) so the circle sits ON TOP of the badge */
     line-height: 1.6;
     text-align: center;
     
+    /* Center the badge wrapper block itself */
+    display: block; /* use block with auto margins to center while honoring width */
+    margin-left: auto;
+    margin-right: auto;
+    
     /* Professional Badge Styles */
-    display: inline-block;
     background: rgba(212, 175, 55, 0.05);
     border: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 15px clamp(15px, 5vw, 30px);
-    border-radius: 100px;
+    /* Extra padding at the bottom (40px instead of 15px) to create an "empty space" so the overlapping circle does not cover the text */
+    padding: 15px clamp(15px, 5vw, 30px) 40px clamp(15px, 5vw, 30px);
+    border-radius: 60px; /* Adjusted slightly so the pill shape remains smooth with the taller height */
 }
 
 .offer-cta-subtext .highlight-text {
