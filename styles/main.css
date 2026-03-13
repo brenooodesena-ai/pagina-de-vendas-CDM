@@ -554,6 +554,7 @@ section {
     line-height: 0.9;
     font-weight: 700;
     letter-spacing: -0.05em;
+    text-shadow: none !important; /* Forces removal of any glowing effect */
 }
 
 .offer-card .price-symbol {
@@ -565,9 +566,10 @@ section {
 
 .offer-card .installment-text {
     color: #FFF;
-    font-size: 1.1rem; /* Reduced from 1.4rem */
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem); /* Match R$ size exactly */
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: none; /* Let it be native lowercase as in HTML */
+    margin-right: 5px; /* Added spacing from R$ */
 }
 
 .offer-card .price-cash {
