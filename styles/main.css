@@ -644,7 +644,7 @@ section {
     font-style: italic;
     letter-spacing: 0.02em;
     margin-top: 0px; /* Reset top margin since it is inside a new section with padding */
-    margin-bottom: -15px; /* Pull badge down to connect with the arrow circle */
+    margin-bottom: -25px; /* Pull badge down exactly to connect with the top of the arrow circle (-25px offset) */
     position: relative;
     z-index: 15; /* Ensure it stays above the line but connects with the circle */
     line-height: 1.6;
