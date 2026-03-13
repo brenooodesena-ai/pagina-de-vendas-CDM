@@ -425,12 +425,13 @@ section {
 }
 
 .value-transition-text {
-    font-size: 1.4rem;
-    color: rgba(255, 255, 255, 0.9); /* Brighter for emphasis */
-    margin-bottom: 20px; /* Space between this and subtext */
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 0.95rem; /* Small font size */
+    color: rgba(255, 255, 255, 0.6); /* Reduced emphasis */
+    margin-top: 8px; /* Very close to the Valor total */
+    margin-bottom: 0px; 
+    font-weight: 400; /* Normal weight */
+    text-transform: none; /* No uppercase */
+    letter-spacing: normal;
     text-align: center;
 }
 
