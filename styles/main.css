@@ -566,7 +566,7 @@ section {
 
 .offer-card .installment-text {
     color: #FFF;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem); /* Match R$ size exactly */
+    font-size: 1.1rem; /* Reduced back from matching R$ size */
     font-weight: 700;
     text-transform: none; /* Let it be native lowercase as in HTML */
     margin-right: 5px; /* Added spacing from R$ */
