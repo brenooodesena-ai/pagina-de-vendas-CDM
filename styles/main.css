@@ -557,7 +557,7 @@ section {
 }
 
 .offer-card .price-symbol {
-    color: var(--c-gold);
+    color: #FFF; /* Changed to white as requested */
     font-size: clamp(1.8rem, 3.5vw, 2.8rem); /* Reduced from 2.5rem - 4rem */
     font-weight: 700;
     margin-right: 5px;
@@ -572,7 +572,7 @@ section {
 
 .offer-card .price-cash {
     color: #CCC;
-    font-size: 2.2rem;
+    font-size: 1.4rem; /* Reduced from 2.2rem */
     font-weight: 400;
     margin-top: 20px;
 }
