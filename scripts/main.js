@@ -109,7 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentIndex = 0;
         const totalSlides = cards.length;
 
-        const updateSlider = () => {
+        const updateSlider = (instant = false) => {
+            if (instant) track.style.transition = 'none';
+            
             const containerWidth = sliderContainer.offsetWidth;
             const cardWidth = cards[0].offsetWidth;
             const cardMargin = parseFloat(window.getComputedStyle(cards[0]).marginLeft);
@@ -126,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.classList.toggle('active', i === currentIndex);
                 
                 if (window.innerWidth > 992) {
-                    // Staggered 3D Depth
                     const scale = 1 - (distance * 0.15);
                     const opacity = 1 - (distance * 0.6);
                     const z = -200 * distance;
@@ -134,13 +135,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     card.style.transform = `translateZ(${z}px) scale(${scale})`;
                 } else {
                     card.style.opacity = i === currentIndex ? '1' : '0.3';
-                    card.style.transform = i === currentIndex ? 'scale(1)' : 'scale(0.9)';
+                    card.style.transform = i === currentIndex ? 'scale(1)' : 'scale(0.9) translateZ(0)';
                 }
             });
 
             // Update Progress Bar
             const progress = ((currentIndex + 1) / totalSlides) * 100;
             if (progressBar) progressBar.style.width = `${progress}%`;
+
+            if (instant) {
+                // Force reflow
+                track.offsetHeight;
+                track.style.transition = ''; // Restore transition
+            }
         };
 
         const nextSlide = () => {
@@ -156,26 +163,24 @@ document.addEventListener('DOMContentLoaded', () => {
         nextBtn.addEventListener('click', nextSlide);
         prevBtn.addEventListener('click', prevSlide);
 
-        // Magnetic Tilt Effect (Desktop)
-        if (window.innerWidth > 992) {
-            cards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    if (!card.classList.contains('active')) return;
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const xc = rect.width / 2;
-                    const yc = rect.height / 2;
-                    const dx = x - xc;
-                    const dy = y - yc;
-                    card.style.transform = `translateZ(50px) rotateX(${dy/-20}deg) rotateY(${dx/20}deg)`;
-                });
-
-                card.addEventListener('mouseleave', () => {
-                    updateSlider(); // Reset position
-                });
+        // Magnetic Tilt Effect (Global delegation for stability)
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if (window.innerWidth <= 992 || !card.classList.contains('active')) return;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xc = rect.width / 2;
+                const yc = rect.height / 2;
+                const dx = x - xc;
+                const dy = y - yc;
+                card.style.transform = `translateZ(50px) rotateX(${dy/-20}deg) rotateY(${dx/20}deg)`;
             });
-        }
+
+            card.addEventListener('mouseleave', () => {
+                if (window.innerWidth > 992) updateSlider(); 
+            });
+        });
 
         // Swipe support
         let startX = 0;
@@ -186,8 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (endX - startX > 50) prevSlide();
         }, {passive: true});
 
-        // Initialize
-        updateSlider();
-        window.addEventListener('resize', updateSlider);
+        // Initialize & Improved Resize Handling
+        updateSlider(true);
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            updateSlider(true); // Instant update on every event
+            resizeTimer = setTimeout(() => updateSlider(true), 150); // Final verification
+        });
     }
 });
