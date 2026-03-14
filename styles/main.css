@@ -1104,11 +1104,12 @@ section {
 
 .faq-item {
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Unified Elite Border */
+    border-radius: 20px;
+    margin-bottom: 20px;
     overflow: hidden;
-    transition: var(--transition-v5);
-    backdrop-filter: blur(10px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(20px); /* Elite Blur */
 }
 
 .faq-item:hover {
@@ -1208,11 +1209,27 @@ section {
 .about-image-wrapper {
     position: relative;
     z-index: 2;
-    border-radius: 20px;
+    border-radius: 30px;
     overflow: hidden;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    background: #111;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    background: #0D0D0E;
+}
+
+.about-image-container::before {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
+    filter: blur(40px);
+    z-index: 1;
+    opacity: 0.6;
+    animation: portraitPulse 5s ease-in-out infinite alternate;
+}
+
+@keyframes portraitPulse {
+    from { transform: scale(0.9) opacity(0.3); }
+    to { transform: scale(1.1) opacity(0.7); }
 }
 
 .about-image-wrapper img {
@@ -1337,12 +1354,22 @@ section {
 
 .access-card {
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Unified elite border */
     padding: 40px 30px;
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    transition: var(--transition-v5);
+    border-radius: 24px; /* Slightly softer corners */
+    backdrop-filter: blur(20px); /* Deeper blur */
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
     text-align: center;
+    overflow: hidden;
+}
+
+.access-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.05), transparent);
+    pointer-events: none;
 }
 
 .access-card:hover {
@@ -1468,34 +1495,37 @@ section {
 }
 
 .module-card {
-    width: 240px;
-    height: 360px;
+    width: 280px; /* Slightly larger */
+    height: 420px;
     flex-shrink: 0;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
-    backdrop-filter: blur(10px);
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s ease;
+    backdrop-filter: blur(20px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .module-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 1; /* Restored original color/vibrancy by default */
+    transition: transform 0.8s ease;
 }
 
 .module-card:hover {
-    transform: translateY(-5px); /* Keep the lift, but remove the image zoom */
-    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-15px) scale(1.02);
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 25px 50px rgba(212, 175, 55, 0.1);
 }
 
-/* Removed hover image zoom as requested */
+.module-card:hover img {
+    transform: scale(1.05);
+}
 
 @keyframes scroll-marquee {
     0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-240px * 16 - 20px * 16)); }
+    100% { transform: translateX(calc(-280px * 16 - 20px * 16)); }
 }
 
 /* --- Sales Video Section --- */
