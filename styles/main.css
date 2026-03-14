@@ -1610,6 +1610,32 @@ section {
     }
     /* Hero VSL Mobile Refinement */
     .video-container {
-        margin-top: 0; /* Set to 0 to nudge it up even more as requested */
+        margin-top: 0;
+    }
+
+    /* Hero Headline Mobile Fix */
+    .headline {
+        font-size: clamp(1.6rem, 7vw, 2.2rem);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        margin-bottom: 20px;
+    }
+
+    #hero-v5 {
+        padding-top: 60px;
+        min-height: auto;
+        padding-bottom: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .headline {
+        font-size: clamp(1.4rem, 6.5vw, 1.9rem);
+        line-height: 1.25;
+    }
+
+    #hero-v5 {
+        padding-top: 50px;
+        padding-bottom: 30px;
     }
 }
