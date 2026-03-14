@@ -571,14 +571,27 @@ section {
 }
 
 .benefit-card.active .benefit-number {
-    opacity: 0.5;
+    opacity: 0.6;
     transform: scale(1.15) translate3d(0, 0, 20px);
-    filter: blur(0) drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
-    animation: goldShimmer 3s linear infinite;
+    filter: blur(0) drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+    animation: 
+        goldShimmer 3s linear infinite,
+        goldPulse 2s ease-in-out infinite alternate;
 }
 
 @keyframes goldShimmer {
     to { background-position: 200% center; }
+}
+
+@keyframes goldPulse {
+    from {
+        opacity: 0.4;
+        filter: blur(0) drop-shadow(0 0 5px rgba(212, 175, 55, 0.2));
+    }
+    to {
+        opacity: 0.8;
+        filter: blur(0) drop-shadow(0 0 25px rgba(212, 175, 55, 0.6));
+    }
 }
 
 /* Elite Active Card State */
