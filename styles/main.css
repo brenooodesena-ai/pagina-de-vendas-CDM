@@ -535,12 +535,34 @@ section {
     display: flex;
     flex-direction: column;
     min-height: 420px;
-    transform: translateZ(-200px) rotateY(0deg);
+    transform: translate3d(0, 0, -200px);
     opacity: 0.4;
     filter: blur(4px);
     box-shadow: 
         0 20px 40px rgba(0, 0, 0, 0.4),
         inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.benefit-number {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    background: var(--grad-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.1;
+    font-family: 'Outfit', sans-serif;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.benefit-card.active .benefit-number {
+    opacity: 0.35;
+    transform: scale(1.1);
 }
 
 /* Elite Active Card State */
