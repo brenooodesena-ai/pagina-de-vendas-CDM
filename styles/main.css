@@ -1613,12 +1613,18 @@ section {
         margin-top: 0;
     }
 
-    /* Hero Headline Mobile Fix */
+    /* Hero Headline Mobile Fix: 3 centered lines */
     .headline {
-        font-size: clamp(1.6rem, 7vw, 2.2rem);
-        line-height: 1.2;
+        font-size: clamp(1.55rem, 6vw, 2rem);
+        line-height: 1.3;
         letter-spacing: -0.02em;
         margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Hide manual line breaks — let text flow naturally into 3 lines */
+    .headline br {
+        display: none;
     }
 
     #hero-v5 {
