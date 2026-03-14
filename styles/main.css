@@ -56,14 +56,15 @@ body {
     position: absolute;
     pointer-events: none;
     z-index: 0;
-    filter: blur(100px); /* Slightly more blur to spread the light further */
+    filter: blur(140px);
     border-radius: 50%;
-    opacity: 0.8; /* Increased from 0.6 to make it much more visible */
+    opacity: 1;
     will-change: transform, opacity;
 }
 
 .light-gold {
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.1) 50%, transparent 80%);
+    /* Very subtle - like a professional luxury site */
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.04) 50%, transparent 80%);
 }
 
 .hero-light-1 {
@@ -1693,7 +1694,7 @@ section {
     }
 
     .light-gold {
-        background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.2) 50%, transparent 80%);
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.07) 50%, transparent 80%);
     }
 
     .hero-light-1 {
@@ -1710,3 +1711,15 @@ section {
         right: -10%;
     }
 }
+
+/* Slow ambient drift - barely perceptible, makes bg feel alive */
+@keyframes ambientDrift {
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(3%, 2%) scale(1.05); }
+    66%  { transform: translate(-2%, 3%) scale(0.97); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+.global-light-1 { animation: ambientDrift 25s ease-in-out infinite; }
+.global-light-2 { animation: ambientDrift 30s ease-in-out infinite reverse; }
+.global-light-3 { animation: ambientDrift 20s ease-in-out infinite 5s; }
