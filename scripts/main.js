@@ -97,4 +97,95 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Benefits Slider Logic ---
+    const track = document.querySelector('.benefits-track');
+    const cards = document.querySelectorAll('.benefit-card');
+    const prevBtn = document.querySelector('.slider-nav.prev');
+    const nextBtn = document.querySelector('.slider-nav.next');
+    const dotsContainer = document.querySelector('.slider-dots');
+
+    if (track && cards.length > 0) {
+        let currentIndex = 0;
+        const totalSlides = cards.length;
+
+        // Create Dots
+        cards.forEach((_, x) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (x === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(x));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        const updateSlider = () => {
+            const cardWidth = cards[0].offsetWidth + 20; // Gap included
+            const moveX = currentIndex * cardWidth;
+            track.style.transform = `translateX(-${moveX}px)`;
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        };
+
+        const goToSlide = (index) => {
+            const isMobile = window.innerWidth <= 992;
+            const isTablet = window.innerWidth > 992 && window.innerWidth <= 1200;
+            
+            let maxIndex;
+            if (isMobile) maxIndex = totalSlides - 1;
+            else if (isTablet) maxIndex = totalSlides - 2;
+            else maxIndex = totalSlides - 3;
+
+            currentIndex = Math.max(0, Math.min(index, maxIndex));
+            updateSlider();
+        };
+
+        nextBtn.addEventListener('click', () => {
+            const isMobile = window.innerWidth <= 992;
+            const isTablet = window.innerWidth > 992 && window.innerWidth <= 1200;
+            let max;
+            if (isMobile) max = totalSlides - 1;
+            else if (isTablet) max = totalSlides - 2;
+            else max = totalSlides - 3;
+
+            if (currentIndex < max) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Loop to start
+            }
+            updateSlider();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                // Loop to end
+                const isMobile = window.innerWidth <= 992;
+                const isTablet = window.innerWidth > 992 && window.innerWidth <= 1200;
+                if (isMobile) currentIndex = totalSlides - 1;
+                else if (isTablet) currentIndex = totalSlides - 2;
+                else currentIndex = totalSlides - 3;
+            }
+            updateSlider();
+        });
+
+        // Touch Swipe Support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        track.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) nextBtn.click();
+            if (touchEndX - touchStartX > 50) prevBtn.click();
+        }, { passive: true });
+
+        window.addEventListener('resize', updateSlider);
+    }
 });
