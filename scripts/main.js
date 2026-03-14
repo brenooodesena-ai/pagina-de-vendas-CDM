@@ -97,95 +97,97 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Benefits Slider Logic ---
+    // --- Elite Benefits Slider Engine ---
+    const sliderContainer = document.querySelector('.benefits-slider-container');
     const track = document.querySelector('.benefits-track');
     const cards = document.querySelectorAll('.benefit-card');
     const prevBtn = document.querySelector('.slider-nav.prev');
     const nextBtn = document.querySelector('.slider-nav.next');
-    const dotsContainer = document.querySelector('.slider-dots');
+    const progressBar = document.querySelector('.slider-progress-bar');
 
     if (track && cards.length > 0) {
         let currentIndex = 0;
         const totalSlides = cards.length;
 
-        // Create Dots
-        cards.forEach((_, x) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (x === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(x));
-            dotsContainer.appendChild(dot);
-        });
-
-        const dots = document.querySelectorAll('.dot');
-
         const updateSlider = () => {
-            const cardWidth = cards[0].offsetWidth + 20; // Gap included
-            const moveX = currentIndex * cardWidth;
+            const containerWidth = sliderContainer.offsetWidth;
+            const cardWidth = cards[0].offsetWidth;
+            const cardMargin = parseFloat(window.getComputedStyle(cards[0]).marginLeft);
+            
+            // Calculate center position
+            const offset = (containerWidth / 2) - (cardWidth / 2) - cardMargin;
+            const moveX = (currentIndex * (cardWidth + (cardMargin * 2))) - offset;
+            
             track.style.transform = `translateX(-${moveX}px)`;
 
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
+            // Update Class and Individual Card States
+            cards.forEach((card, i) => {
+                const distance = Math.abs(i - currentIndex);
+                card.classList.toggle('active', i === currentIndex);
+                
+                if (window.innerWidth > 992) {
+                    // Staggered 3D Depth
+                    const scale = 1 - (distance * 0.15);
+                    const opacity = 1 - (distance * 0.6);
+                    const z = -200 * distance;
+                    card.style.opacity = Math.max(0.1, opacity);
+                    card.style.transform = `translateZ(${z}px) scale(${scale})`;
+                } else {
+                    card.style.opacity = i === currentIndex ? '1' : '0.3';
+                    card.style.transform = i === currentIndex ? 'scale(1)' : 'scale(0.9)';
+                }
             });
+
+            // Update Progress Bar
+            const progress = ((currentIndex + 1) / totalSlides) * 100;
+            if (progressBar) progressBar.style.width = `${progress}%`;
         };
 
-        const goToSlide = (index) => {
-            const isMobile = window.innerWidth <= 992;
-            const isTablet = window.innerWidth > 992 && window.innerWidth <= 1200;
-            
-            let maxIndex;
-            if (isMobile) maxIndex = totalSlides - 1;
-            else if (isTablet) maxIndex = totalSlides - 2;
-            else maxIndex = totalSlides - 3;
-
-            currentIndex = Math.max(0, Math.min(index, maxIndex));
+        const nextSlide = () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
             updateSlider();
         };
 
-        nextBtn.addEventListener('click', () => {
-            const isMobile = window.innerWidth <= 992;
-            const isTablet = window.innerWidth > 992 && window.innerWidth <= 1200;
-            let max;
-            if (isMobile) max = totalSlides - 1;
-            else if (isTablet) max = totalSlides - 2;
-            else max = totalSlides - 3;
-
-            if (currentIndex < max) {
-                currentIndex++;
-            } else {
-                currentIndex = 0; // Loop to start
-            }
+        const prevSlide = () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
             updateSlider();
-        });
+        };
 
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                // Loop to end
-                const isMobile = window.innerWidth <= 992;
-                const isTablet = window.innerWidth > 992 && window.innerWidth <= 1200;
-                if (isMobile) currentIndex = totalSlides - 1;
-                else if (isTablet) currentIndex = totalSlides - 2;
-                else currentIndex = totalSlides - 3;
-            }
-            updateSlider();
-        });
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
 
-        // Touch Swipe Support
-        let touchStartX = 0;
-        let touchEndX = 0;
+        // Magnetic Tilt Effect (Desktop)
+        if (window.innerWidth > 992) {
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    if (!card.classList.contains('active')) return;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const xc = rect.width / 2;
+                    const yc = rect.height / 2;
+                    const dx = x - xc;
+                    const dy = y - yc;
+                    card.style.transform = `translateZ(50px) rotateX(${dy/-20}deg) rotateY(${dx/20}deg)`;
+                });
 
-        track.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
+                card.addEventListener('mouseleave', () => {
+                    updateSlider(); // Reset position
+                });
+            });
+        }
 
-        track.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 50) nextBtn.click();
-            if (touchEndX - touchStartX > 50) prevBtn.click();
-        }, { passive: true });
+        // Swipe support
+        let startX = 0;
+        track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX, {passive: true});
+        track.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) nextSlide();
+            if (endX - startX > 50) prevSlide();
+        }, {passive: true});
 
+        // Initialize
+        updateSlider();
         window.addEventListener('resize', updateSlider);
     }
 });
