@@ -112,8 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let isTransitioning = false;
 
         const updateSlider = (instant = false) => {
-            if (instant) track.style.transition = 'none';
-            else track.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+            if (instant) {
+                track.style.transition = 'none';
+            } else {
+                track.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+            }
             
             const containerWidth = sliderContainer.offsetWidth;
             const cardWidth = allCards[0].offsetWidth;
@@ -123,15 +126,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const offset = (containerWidth / 2) - (cardWidth / 2) - cardMargin;
             const moveX = (currentIndex * (cardWidth + (cardMargin * 2))) - offset;
             
-            track.style.transform = `translateX(-${moveX}px)`;
+            track.style.transform = `translate3d(-${moveX}px, 0, 0)`; // Forced Layer Promotion
 
-            // Update Class and Individual Card States
+            // Update States
             allCards.forEach((card, i) => {
-                // Determine logical index for active state
-                let logicalIndex = currentIndex;
-                if (currentIndex === 0) logicalIndex = originalCardsCount;
-                if (currentIndex === originalCardsCount + 1) logicalIndex = 1;
-
                 const distance = Math.abs(i - currentIndex);
                 card.classList.toggle('active', i === currentIndex);
                 
@@ -143,38 +141,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     card.style.transform = `translateZ(${z}px) scale(${scale})`;
                 } else {
                     card.style.opacity = i === currentIndex ? '1' : '0.3';
-                    card.style.transform = i === currentIndex ? 'scale(1)' : 'scale(0.9) translateZ(0)';
+                    card.style.transform = i === currentIndex ? 'scale(1)' : 'scale(0.9)';
                 }
             });
 
-            // Update Progress Bar based on "Real" items (1 to 6)
-            let displayIndex = currentIndex;
-            if (currentIndex === 0) displayIndex = originalCardsCount;
-            else if (currentIndex === originalCardsCount + 1) displayIndex = 1;
+            // Progress Bar (1-6)
+            let logicalProgressIndex = currentIndex;
+            if (currentIndex === 0) logicalProgressIndex = originalCardsCount;
+            else if (currentIndex === originalCardsCount + 1) logicalProgressIndex = 1;
             
-            const progress = (displayIndex / originalCardsCount) * 100;
+            const progress = (logicalProgressIndex / originalCardsCount) * 100;
             if (progressBar) progressBar.style.width = `${progress}%`;
 
             if (instant) {
-                track.offsetHeight; // Force reflow
+                track.offsetHeight; // Reflow
             }
         };
 
         const handleLoop = () => {
-            isTransitioning = false;
-            // If at Clone-First (end), jump to Real-First (index 1)
             if (currentIndex === originalCardsCount + 1) {
                 currentIndex = 1;
                 updateSlider(true);
-            }
-            // If at Clone-Last (start), jump to Real-Last (index 6)
-            if (currentIndex === 0) {
+            } else if (currentIndex === 0) {
                 currentIndex = originalCardsCount;
                 updateSlider(true);
             }
+            isTransitioning = false;
         };
 
         track.addEventListener('transitionend', handleLoop);
+        track.addEventListener('webkitTransitionEnd', handleLoop); // Compatibility
 
         const nextSlide = () => {
             if (isTransitioning) return;
