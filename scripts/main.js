@@ -210,14 +210,4 @@ document.addEventListener('DOMContentLoaded', () => {
             resizeTimeout = setTimeout(() => updateSlider(true), 150);
         });
     }
-
-        // Initialize & Improved Resize Handling
-        updateSlider(true);
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            updateSlider(true);
-            resizeTimer = setTimeout(() => updateSlider(true), 150);
-        });
-    }
 });
