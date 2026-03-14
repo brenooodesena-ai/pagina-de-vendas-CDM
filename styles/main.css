@@ -1650,3 +1650,39 @@ section {
         padding-bottom: 30px;
     }
 }
+/* ===== MOBILE BACKGROUND & AMBIENT LIGHT FIX ===== */
+@media (max-width: 992px) {
+    .fixed-bg-grid {
+        position: fixed;
+        background-color: var(--c-matte);
+        background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    .ambient-light {
+        filter: blur(60px);
+        opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+
+    .light-gold {
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.2) 50%, transparent 80%);
+    }
+
+    .hero-light-1 {
+        width: 90vw;
+        height: 50vh;
+        top: -5%;
+        left: -10%;
+    }
+
+    .hero-light-2 {
+        width: 80vw;
+        height: 50vh;
+        bottom: -5%;
+        right: -10%;
+    }
+}
