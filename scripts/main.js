@@ -111,23 +111,27 @@ document.addEventListener('DOMContentLoaded', () => {
         let isTransitioning = false;
 
         const updateSlider = (instant = false) => {
-            if (instant) {
-                track.style.transition = 'none';
-            } else {
-                track.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
-            }
+            // Transition control
+            track.style.transition = instant ? 'none' : 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
             
             const containerWidth = sliderContainer.offsetWidth;
             const cardWidth = cards[0].offsetWidth;
-            const cardMargin = parseFloat(window.getComputedStyle(cards[0]).marginLeft);
+            // Use a safer way to get the margin
+            const style = window.getComputedStyle(cards[0]);
+            const marginLeft = parseFloat(style.marginLeft) || 0;
+            const marginRight = parseFloat(style.marginRight) || 0;
+            const fullCardWidth = cardWidth + marginLeft + marginRight;
             
-            // Calculate center position
-            const offset = (containerWidth / 2) - (cardWidth / 2) - cardMargin;
-            const moveX = (currentIndex * (cardWidth + (cardMargin * 2))) - offset;
+            // Math for centering: Position = (ContainerMiddle) - (CurrentCardMiddle) - (CurrentCardPositionWithinTrack)
+            // But within the track, the card is at index * fullCardWidth
+            // So we need to shift the track left by (index * fullCardWidth) and then shift right by compensate to center
+            const centerOffset = (containerWidth / 2) - (cardWidth / 2) - marginLeft;
+            const finalX = (currentIndex * fullCardWidth) - centerOffset;
             
-            track.style.transform = `translate3d(-${moveX}px, 0, 0)`; // Forced Layer Promotion
+            // Use Template literal carefully to avoid double negatives in CSS
+            track.style.transform = `translate3d(${-finalX}px, 0, 0)`;
 
-            // Update States
+            // Update States (Depth & Opacity)
             cards.forEach((card, i) => {
                 const distance = Math.abs(i - currentIndex);
                 card.classList.toggle('active', i === currentIndex);
@@ -144,76 +148,68 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Progress Bar (1-6)
+            // Sync Progress Bar
             const progress = ((currentIndex + 1) / totalSlides) * 100;
             if (progressBar) progressBar.style.width = `${progress}%`;
 
-            if (instant) {
-                track.offsetHeight; // Reflow
-            }
+            if (instant) track.offsetHeight; // Force reflow
         };
 
         const nextSlide = () => {
             if (isTransitioning) return;
             isTransitioning = true;
             
-            if (currentIndex >= totalSlides - 1) {
-                currentIndex = 0; // Rewind to start
-            } else {
-                currentIndex++;
-            }
+            currentIndex = (currentIndex >= totalSlides - 1) ? 0 : currentIndex + 1;
             updateSlider();
             
-            setTimeout(() => { isTransitioning = false; }, 800);
+            setTimeout(() => { isTransitioning = false; }, 850);
         };
 
         const prevSlide = () => {
             if (isTransitioning) return;
             isTransitioning = true;
             
-            if (currentIndex <= 0) {
-                currentIndex = totalSlides - 1; // Fast-forward to end
-            } else {
-                currentIndex--;
-            }
+            currentIndex = (currentIndex <= 0) ? totalSlides - 1 : currentIndex - 1;
             updateSlider();
             
-            setTimeout(() => { isTransitioning = false; }, 800);
+            setTimeout(() => { isTransitioning = false; }, 850);
         };
 
         nextBtn.addEventListener('click', nextSlide);
         prevBtn.addEventListener('click', prevSlide);
 
-        // Magnetic Tilt Effect
+        // Magnetic Tilt
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 if (window.innerWidth <= 992 || !card.classList.contains('active')) return;
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                const xc = rect.width / 2;
-                const yc = rect.height / 2;
-                const dx = x - xc;
-                const dy = y - yc;
-                card.style.transform = `translateZ(50px) rotateX(${dy/-20}deg) rotateY(${dx/20}deg)`;
+                card.style.transform = `translateZ(50px) rotateX(${(y - rect.height/2) / -20}deg) rotateY(${(x - rect.width/2) / 20}deg)`;
             });
-
             card.addEventListener('mouseleave', () => {
                 if (window.innerWidth > 992) updateSlider(); 
             });
         });
 
-        // Swipe support
+        // Swipe (Mobile)
         let startX = 0;
-        track.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        }, {passive: true});
-        
+        track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX, {passive: true});
         track.addEventListener('touchend', (e) => {
             const endX = e.changedTouches[0].clientX;
             if (startX - endX > 50) nextSlide();
-            if (endX - startX > 50) prevSlide();
+            else if (endX - startX > 50) prevSlide();
         }, {passive: true});
+
+        // Initialization & Resize
+        updateSlider(true);
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            updateSlider(true);
+            resizeTimeout = setTimeout(() => updateSlider(true), 150);
+        });
+    }
 
         // Initialize & Improved Resize Handling
         updateSlider(true);
