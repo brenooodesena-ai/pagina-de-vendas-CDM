@@ -79,6 +79,30 @@ body {
     width: 60vw;
     height: 60vh;
 }
+/* ===== GLOBAL AMBIENT LIGHTS (covers entire page) ===== */
+.global-light-1 {
+    top: -10%;
+    left: -10%;
+    width: 70vw;
+    height: 70vh;
+}
+
+.global-light-2 {
+    bottom: 10%;
+    right: -10%;
+    width: 65vw;
+    height: 65vh;
+}
+
+.global-light-3 {
+    top: 50%;
+    left: 30%;
+    width: 50vw;
+    height: 50vh;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
+
 
 /* Removing global ::after light to keep it section-specific */
 
