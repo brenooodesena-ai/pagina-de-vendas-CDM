@@ -97,24 +97,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Elite Benefits Slider Engine ---
+    // --- Elite Benefits Slider Engine (Infinite Loop Mode) ---
     const sliderContainer = document.querySelector('.benefits-slider-container');
     const track = document.querySelector('.benefits-track');
-    const cards = document.querySelectorAll('.benefit-card');
+    const allCards = document.querySelectorAll('.benefit-card');
     const prevBtn = document.querySelector('.slider-nav.prev');
     const nextBtn = document.querySelector('.slider-nav.next');
     const progressBar = document.querySelector('.slider-progress-bar');
 
-    if (track && cards.length > 0) {
-        let currentIndex = 0;
-        const totalSlides = cards.length;
+    if (track && allCards.length > 0) {
+        // Find real slides vs clones
+        const originalCardsCount = 6;
+        let currentIndex = 1; // Start at the first "real" slide (index 0 is clone of last)
+        let isTransitioning = false;
 
         const updateSlider = (instant = false) => {
             if (instant) track.style.transition = 'none';
+            else track.style.transition = 'transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
             
             const containerWidth = sliderContainer.offsetWidth;
-            const cardWidth = cards[0].offsetWidth;
-            const cardMargin = parseFloat(window.getComputedStyle(cards[0]).marginLeft);
+            const cardWidth = allCards[0].offsetWidth;
+            const cardMargin = parseFloat(window.getComputedStyle(allCards[0]).marginLeft);
             
             // Calculate center position
             const offset = (containerWidth / 2) - (cardWidth / 2) - cardMargin;
@@ -123,7 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
             track.style.transform = `translateX(-${moveX}px)`;
 
             // Update Class and Individual Card States
-            cards.forEach((card, i) => {
+            allCards.forEach((card, i) => {
+                // Determine logical index for active state
+                let logicalIndex = currentIndex;
+                if (currentIndex === 0) logicalIndex = originalCardsCount;
+                if (currentIndex === originalCardsCount + 1) logicalIndex = 1;
+
                 const distance = Math.abs(i - currentIndex);
                 card.classList.toggle('active', i === currentIndex);
                 
@@ -139,32 +147,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Update Progress Bar
-            const progress = ((currentIndex + 1) / totalSlides) * 100;
+            // Update Progress Bar based on "Real" items (1 to 6)
+            let displayIndex = currentIndex;
+            if (currentIndex === 0) displayIndex = originalCardsCount;
+            else if (currentIndex === originalCardsCount + 1) displayIndex = 1;
+            
+            const progress = (displayIndex / originalCardsCount) * 100;
             if (progressBar) progressBar.style.width = `${progress}%`;
 
             if (instant) {
-                // Force reflow
-                track.offsetHeight;
-                track.style.transition = ''; // Restore transition
+                track.offsetHeight; // Force reflow
             }
         };
 
+        const handleLoop = () => {
+            isTransitioning = false;
+            // If at Clone-First (end), jump to Real-First (index 1)
+            if (currentIndex === originalCardsCount + 1) {
+                currentIndex = 1;
+                updateSlider(true);
+            }
+            // If at Clone-Last (start), jump to Real-Last (index 6)
+            if (currentIndex === 0) {
+                currentIndex = originalCardsCount;
+                updateSlider(true);
+            }
+        };
+
+        track.addEventListener('transitionend', handleLoop);
+
         const nextSlide = () => {
-            currentIndex = (currentIndex + 1) % totalSlides;
+            if (isTransitioning) return;
+            isTransitioning = true;
+            currentIndex++;
             updateSlider();
         };
 
         const prevSlide = () => {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            if (isTransitioning) return;
+            isTransitioning = true;
+            currentIndex--;
             updateSlider();
         };
 
         nextBtn.addEventListener('click', nextSlide);
         prevBtn.addEventListener('click', prevSlide);
 
-        // Magnetic Tilt Effect (Global delegation for stability)
-        cards.forEach(card => {
+        // Magnetic Tilt Effect
+        allCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 if (window.innerWidth <= 992 || !card.classList.contains('active')) return;
                 const rect = card.getBoundingClientRect();
@@ -184,8 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Swipe support
         let startX = 0;
-        track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX, {passive: true});
+        track.addEventListener('touchstart', (e) => {
+            if (isTransitioning) return;
+            startX = e.touches[0].clientX;
+        }, {passive: true});
+        
         track.addEventListener('touchend', (e) => {
+            if (isTransitioning) return;
             const endX = e.changedTouches[0].clientX;
             if (startX - endX > 50) nextSlide();
             if (endX - startX > 50) prevSlide();
@@ -196,8 +231,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
-            updateSlider(true); // Instant update on every event
-            resizeTimer = setTimeout(() => updateSlider(true), 150); // Final verification
+            updateSlider(true);
+            resizeTimer = setTimeout(() => updateSlider(true), 150);
         });
     }
 });
