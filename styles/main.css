@@ -1742,6 +1742,24 @@ section {
     }
 }
 
+
+.global-light-4 {
+    top: -5%;
+    right: -10%;
+    width: 60vw;
+    height: 60vh;
+    opacity: 0.4;
+    animation: ambientDrift 28s ease-in-out infinite alternate;
+}
+
+.global-light-5 {
+    bottom: -10%;
+    left: -15%;
+    width: 65vw;
+    height: 65vh;
+    opacity: 0.4;
+    animation: ambientDrift 32s ease-in-out infinite 2s alternate-reverse;
+}
 /* Slow ambient drift - barely perceptible, makes bg feel alive */
 @keyframes ambientDrift {
     0%   { transform: translate(0, 0) scale(1); }
