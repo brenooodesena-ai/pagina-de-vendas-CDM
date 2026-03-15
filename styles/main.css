@@ -1639,7 +1639,7 @@ section {
     }
 
     #hero-v5 {
-        padding-top: 140px; /* Increased to move title down */
+        padding-top: 80px; /* Reduced to bring content closer to top */
         min-height: auto;
         padding-bottom: 40px;
     }
@@ -1658,7 +1658,7 @@ section {
     }
 
     #hero-v5 {
-        padding-top: 120px; /* Increased to move title down */
+        padding-top: 60px; /* Reduced to bring content closer to top */
         padding-bottom: 30px;
     }
 
