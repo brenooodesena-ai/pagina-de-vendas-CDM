@@ -84,6 +84,10 @@ export function LiquidMetalButton({
             opacity: 0.5;
           }
         }
+        @keyframes text-shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
       `;
       document.head.appendChild(style);
     }
@@ -253,16 +257,26 @@ export function LiquidMetalButton({
             {viewMode === "text" && (
               <span
                 style={{
-                  fontSize: "18px",
-                  color: "#FFFFFF", // Changed to white
+                  fontSize: "19px",
                   fontFamily: "'Inter', sans-serif",
-                  fontWeight: 800,
+                  fontWeight: 900,
                   textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  textShadow: "0px 1px 2px rgba(0, 0, 0, 0.4)", // Darker shadow for white text on gold
+                  letterSpacing: "0.15em",
+                  whiteSpace: "nowrap",
+                  
+                  /* Professional Metallic Text Finish */
+                  background: "linear-gradient(to bottom, #FFFFFF 0%, #F5E1A4 40%, #D4AF37 60%, #B8860B 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  filter: "drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.5))",
+                  
+                  /* Animated Shimmer Over Text */
+                  backgroundImage: "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.8) 50%, transparent 70%), linear-gradient(to bottom, #FFFFFF 0%, #F5E1A4 40%, #D4AF37 60%, #B8860B 100%)",
+                  backgroundSize: "200% 100%, 100% 100%",
+                  animation: "text-shimmer 4s linear infinite",
+
                   transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
                   transform: "scale(1)",
-                  whiteSpace: "nowrap",
                 }}
               >
                 {label}
