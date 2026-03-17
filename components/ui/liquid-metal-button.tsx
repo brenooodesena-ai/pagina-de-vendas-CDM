@@ -26,6 +26,7 @@ export function LiquidMetalButton({
   const shaderMount = useRef<any>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const rippleId = useRef(0);
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
 
   const dimensions = useMemo(() => {
     if (viewMode === "icon") {
@@ -84,10 +85,6 @@ export function LiquidMetalButton({
             opacity: 0.5;
           }
         }
-        @keyframes text-shimmer {
-          0% { background-position: -200% center; }
-          100% { background-position: 200% center; }
-        }
       `;
       document.head.appendChild(style);
     }
@@ -134,6 +131,22 @@ export function LiquidMetalButton({
     };
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    // Calculate rotation (delicate effect: max 10 degrees)
+    const rotateY = ((x - centerX) / centerX) * 8;
+    const rotateX = ((centerY - y) / centerY) * 8;
+    
+    setRotate({ x: rotateX, y: rotateY });
+  };
+
   const handleMouseEnter = () => {
     setIsHovered(true);
     shaderMount.current?.setSpeed?.(1);
@@ -142,6 +155,7 @@ export function LiquidMetalButton({
   const handleMouseLeave = () => {
     setIsHovered(false);
     setIsPressed(false);
+    setRotate({ x: 0, y: 0 }); // Reset tilt
     shaderMount.current?.setSpeed?.(0.6);
   };
 
@@ -180,15 +194,49 @@ export function LiquidMetalButton({
           perspectiveOrigin: "50% 50%",
         }}
       >
+        {/* Premium Multi-layered Ambient Glow */}
+        <div 
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: `${dimensions.width * 1.8}px`,
+            height: `${dimensions.height * 3.5}px`,
+            background: "radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 75%)",
+            borderRadius: "50%",
+            zIndex: 0,
+            pointerEvents: "none",
+            filter: "blur(70px)",
+            animation: "glow-breath 6s ease-in-out infinite",
+          }}
+        />
+        <div 
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: `${dimensions.width * 1.2}px`,
+            height: `${dimensions.height * 2.2}px`,
+            background: "radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%)",
+            borderRadius: "50%",
+            zIndex: 0,
+            pointerEvents: "none",
+            filter: "blur(40px)",
+            opacity: 0.6,
+          }}
+        />
         <div
           style={{
             position: "relative",
             width: `${dimensions.width}px`,
             height: `${dimensions.height}px`,
             transformStyle: "preserve-3d",
-            transition:
-              "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-            transform: "none",
+            transition: isHovered 
+              ? "width 0.4s ease, height 0.4s ease, gap 0.4s ease" // Faster response while hovering
+              : "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
+            transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
           }}
         >
           <div
@@ -224,24 +272,16 @@ export function LiquidMetalButton({
             {viewMode === "text" && (
               <span
                 style={{
-                  fontSize: "19px",
-                  fontFamily: "'Inter', sans-serif",
-                  fontWeight: 900,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.15em",
-                  whiteSpace: "nowrap",
-                  
-                  /* Clean White Text Finish - No Shadow */
+                  fontSize: "18px",
                   color: "#FFFFFF",
-                  WebkitTextFillColor: "#FFFFFF",
-                  
-                  /* Subtle Shimmer Over White Text */
-                  background: "linear-gradient(120deg, transparent 35%, rgba(255,255,255,0.3) 50%, transparent 65%)",
-                  backgroundSize: "200% 100%",
-                  animation: "text-shimmer 5s linear infinite",
-
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: 800,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  textShadow: "0px 1px 2px rgba(0, 0, 0, 0.4)",
                   transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
                   transform: "scale(1)",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {label}
@@ -269,8 +309,10 @@ export function LiquidMetalButton({
                 height: `${dimensions.innerHeight}px`,
                 margin: "2px",
                 borderRadius: "100px",
-                background: "linear-gradient(135deg, #CFB53B 0%, #D4AF37 40%, #FFF5C2 50%, #D4AF37 60%, #B8860B 100%)", // Reduced white intensity, matched gold
-                boxShadow: "none",
+                background: "linear-gradient(135deg, #CFB53B 0%, #F5E1A4 20%, #D4AF37 50%, #F5E1A4 80%, #B8860B 100%)", // Metallic 5-stop gradient
+                boxShadow: isPressed
+                  ? "inset 0px 2px 4px rgba(0, 0, 0, 0.2), inset 0px 1px 2px rgba(0, 0, 0, 0.1)"
+                  : "none",
                 transition:
                   "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
               }}
@@ -296,7 +338,9 @@ export function LiquidMetalButton({
                 height: `${dimensions.height}px`,
                 width: `${dimensions.width}px`,
                 borderRadius: "100px",
-                boxShadow: "none",
+                boxShadow: isPressed
+                  ? "0px 1px 2px rgba(0, 0, 0, 0.5)"
+                  : "0px 0px 0px 1px rgba(212, 175, 55, 0.3)",
                 transition:
                   "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
                 background: "rgb(0 0 0 / 0)",
@@ -322,6 +366,7 @@ export function LiquidMetalButton({
             ref={buttonRef}
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}
+            onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             onMouseDown={() => setIsPressed(true)}
             onMouseUp={() => setIsPressed(false)}
