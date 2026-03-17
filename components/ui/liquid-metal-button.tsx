@@ -180,39 +180,6 @@ export function LiquidMetalButton({
           perspectiveOrigin: "50% 50%",
         }}
       >
-        {/* Premium Multi-layered Ambient Glow */}
-        <div 
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: `${dimensions.width * 1.8}px`,
-            height: `${dimensions.height * 3.5}px`,
-            background: "radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 75%)",
-            borderRadius: "50%",
-            zIndex: 0,
-            pointerEvents: "none",
-            filter: "blur(70px)",
-            animation: "glow-breath 6s ease-in-out infinite",
-          }}
-        />
-        <div 
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: `${dimensions.width * 1.2}px`,
-            height: `${dimensions.height * 2.2}px`,
-            background: "radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%)",
-            borderRadius: "50%",
-            zIndex: 0,
-            pointerEvents: "none",
-            filter: "blur(40px)",
-            opacity: 0.6,
-          }}
-        />
         <div
           style={{
             position: "relative",
@@ -264,14 +231,14 @@ export function LiquidMetalButton({
                   letterSpacing: "0.15em",
                   whiteSpace: "nowrap",
                   
-                  /* Clean White Text Finish */
+                  /* Clean White Text Finish - No Shadow */
                   color: "#FFFFFF",
                   WebkitTextFillColor: "#FFFFFF",
                   
-                  /* Refined Shimmer Over White Text */
-                  background: "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%)",
+                  /* Subtle Shimmer Over White Text */
+                  background: "linear-gradient(120deg, transparent 35%, rgba(255,255,255,0.3) 50%, transparent 65%)",
                   backgroundSize: "200% 100%",
-                  animation: "text-shimmer 4s linear infinite",
+                  animation: "text-shimmer 5s linear infinite",
 
                   transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
                   transform: "scale(1)",
@@ -302,10 +269,8 @@ export function LiquidMetalButton({
                 height: `${dimensions.innerHeight}px`,
                 margin: "2px",
                 borderRadius: "100px",
-                background: "linear-gradient(135deg, #CFB53B 0%, #FFF5C2 20%, #D4AF37 50%, #FFF5C2 80%, #B8860B 100%)", // Matched with training theme
-                boxShadow: isPressed
-                  ? "inset 0px 2px 4px rgba(0, 0, 0, 0.2), inset 0px 1px 2px rgba(0, 0, 0, 0.1)"
-                  : "none",
+                background: "linear-gradient(135deg, #CFB53B 0%, #D4AF37 40%, #FFF5C2 50%, #D4AF37 60%, #B8860B 100%)", // Reduced white intensity, matched gold
+                boxShadow: "none",
                 transition:
                   "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
               }}
@@ -331,9 +296,7 @@ export function LiquidMetalButton({
                 height: `${dimensions.height}px`,
                 width: `${dimensions.width}px`,
                 borderRadius: "100px",
-                boxShadow: isPressed
-                  ? "0px 1px 2px rgba(0, 0, 0, 0.5)"
-                  : "0px 0px 0px 1px rgba(212, 175, 55, 0.3)",
+                boxShadow: "none",
                 transition:
                   "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
                 background: "rgb(0 0 0 / 0)",
