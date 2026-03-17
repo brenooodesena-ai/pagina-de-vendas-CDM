@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
     /* Design Tokens - Reference Match v7.0 */
     --c-matte: #0A0A0B; /* Deep matte black from image */
@@ -353,10 +355,10 @@ section {
 
 /* Linha de Separação Padrão (Elegante) */
 .section-divider {
-    width: 60%; /* Reduced for elegance */
+    width: 85%; /* Matched with other lines */
     margin: 80px auto;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
 }
 
 .section-label {
@@ -1514,13 +1516,13 @@ section {
 }
 
 .module-card:hover {
-    transform: translateY(-15px) scale(1.02);
+    transform: translateY(-15px);
     border-color: rgba(212, 175, 55, 0.5);
     box-shadow: 0 25px 50px rgba(212, 175, 55, 0.1);
 }
 
 .module-card:hover img {
-    transform: scale(1.05);
+    transform: none;
 }
 
 @keyframes scroll-marquee {
@@ -1542,8 +1544,8 @@ section {
     height: 0;
     background: #000;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
     overflow: hidden;
     background: #000;
 }
