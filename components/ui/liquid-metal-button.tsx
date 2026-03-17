@@ -76,14 +76,12 @@ export function LiquidMetalButton({
         }
         @keyframes glow-breath {
           0%, 100% {
-            transform: scale(1);
-            opacity: 0.5;
-            filter: blur(40px);
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.35;
           }
           50% {
-            transform: scale(1.15);
-            opacity: 0.8;
-            filter: blur(55px);
+            transform: translate(-50%, -50%) scale(1.08);
+            opacity: 0.5;
           }
         }
       `;
@@ -178,20 +176,37 @@ export function LiquidMetalButton({
           perspectiveOrigin: "50% 50%",
         }}
       >
-        {/* Premium Background Glow */}
+        {/* Premium Multi-layered Ambient Glow */}
         <div 
           style={{
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: `${dimensions.width * 1.4}px`,
-            height: `${dimensions.height * 2.5}px`,
-            background: "radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.1) 40%, transparent 70%)",
+            width: `${dimensions.width * 1.8}px`,
+            height: `${dimensions.height * 3.5}px`,
+            background: "radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 75%)",
             borderRadius: "50%",
             zIndex: 0,
             pointerEvents: "none",
-            animation: "glow-breath 4s ease-in-out infinite",
+            filter: "blur(70px)",
+            animation: "glow-breath 6s ease-in-out infinite",
+          }}
+        />
+        <div 
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: `${dimensions.width * 1.2}px`,
+            height: `${dimensions.height * 2.2}px`,
+            background: "radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%)",
+            borderRadius: "50%",
+            zIndex: 0,
+            pointerEvents: "none",
+            filter: "blur(40px)",
+            opacity: 0.6,
           }}
         />
         <div
