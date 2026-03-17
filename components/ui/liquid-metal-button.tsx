@@ -26,7 +26,6 @@ export function LiquidMetalButton({
   const shaderMount = useRef<any>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const rippleId = useRef(0);
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
 
   const dimensions = useMemo(() => {
     if (viewMode === "icon") {
@@ -131,22 +130,6 @@ export function LiquidMetalButton({
     };
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    // Calculate rotation (delicate effect)
-    // Tilt TOWARDS the mouse for a premium "follow" effect
-    const rotateY = ((x - centerX) / centerX) * 12; // Increased for better depth perception
-    const rotateX = ((centerY - y) / centerY) * -12; 
-    
-    setRotate({ x: rotateX, y: rotateY });
-  };
-
   const handleMouseEnter = () => {
     setIsHovered(true);
     shaderMount.current?.setSpeed?.(1);
@@ -155,7 +138,6 @@ export function LiquidMetalButton({
   const handleMouseLeave = () => {
     setIsHovered(false);
     setIsPressed(false);
-    setRotate({ x: 0, y: 0 }); // Reset tilt
     shaderMount.current?.setSpeed?.(0.6);
   };
 
@@ -189,18 +171,10 @@ export function LiquidMetalButton({
   return (
     <div 
       className="relative inline-block"
-      onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{ isolation: "isolate" }} // Prevent stacking context issues
     >
-      <div
-        style={{
-          perspective: "1200px",
-          perspectiveOrigin: "50% 50%",
-          transformStyle: "preserve-3d",
-        }}
-      >
+      <div>
         {/* Premium Multi-layered Ambient Glow */}
         <div 
           style={{
@@ -239,14 +213,9 @@ export function LiquidMetalButton({
             position: "relative",
             width: `${dimensions.width}px`,
             height: `${dimensions.height}px`,
-            transformStyle: "preserve-3d",
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            willChange: "transform",
             transition: isHovered 
-              ? "transform 0.1s ease-out, width 0.4s ease, height 0.4s ease" // Tighter transform response
+              ? "width 0.4s ease, height 0.4s ease, gap 0.4s ease"
               : "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
-            transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
           }}
         >
           <div
@@ -260,13 +229,10 @@ export function LiquidMetalButton({
               alignItems: "center",
               justifyContent: "center",
               gap: "6px",
-              transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, gap 0.4s ease",
-              transform: "translate3d(0, 0, 100px)", // Extreme Z-depth for text
               zIndex: 30,
               pointerEvents: "none",
-              backfaceVisibility: "visible",
             }}
           >
             {viewMode === "icon" && (
@@ -307,12 +273,10 @@ export function LiquidMetalButton({
               left: 0,
               width: `${dimensions.width}px`,
               height: `${dimensions.height}px`,
-              transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translate3d(0, ${isPressed ? "1px" : "0"}, 50px) scale(${isPressed ? 0.98 : 1})`, // Strong Z-separation
+              transform: isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)",
               zIndex: 20,
-              backfaceVisibility: "visible",
             }}
           >
             <div
@@ -338,12 +302,10 @@ export function LiquidMetalButton({
               left: 0,
               width: `${dimensions.width}px`,
               height: `${dimensions.height}px`,
-              transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translate3d(0, ${isPressed ? "1px" : "0"}, 1px) scale(${isPressed ? 0.98 : 1})`,
+              transform: isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)",
               zIndex: 10,
-              backfaceVisibility: "hidden",
             }}
           >
             <div
@@ -391,11 +353,9 @@ export function LiquidMetalButton({
               cursor: "pointer",
               outline: "none",
               zIndex: 40,
-              transformStyle: "preserve-3d",
-              transform: "translate3d(0, 0, 110px)", // Highest layer to ensure hit area
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              overflow: "visible", 
+              overflow: "hidden", 
               borderRadius: "100px",
             }}
             aria-label={label}
