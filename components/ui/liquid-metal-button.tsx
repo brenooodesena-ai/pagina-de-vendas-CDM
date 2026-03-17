@@ -140,9 +140,9 @@ export function LiquidMetalButton({
     const centerY = rect.height / 2;
     
     // Calculate rotation (delicate effect)
-    // Inverted Y rotation for "tilt-towards-mouse" effect (more stable)
-    const rotateY = ((x - centerX) / centerX) * 10;
-    const rotateX = ((centerY - y) / centerY) * 10;
+    // Tilt TOWARDS the mouse for a premium "follow" effect
+    const rotateY = ((x - centerX) / centerX) * 12; // Increased for better depth perception
+    const rotateX = ((centerY - y) / centerY) * -12; 
     
     setRotate({ x: rotateX, y: rotateY });
   };
@@ -192,11 +192,13 @@ export function LiquidMetalButton({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      style={{ isolation: "isolate" }} // Prevent stacking context issues
     >
       <div
         style={{
-          perspective: "1200px", // Increased perspective for stability
+          perspective: "1200px",
           perspectiveOrigin: "50% 50%",
+          transformStyle: "preserve-3d",
         }}
       >
         {/* Premium Multi-layered Ambient Glow */}
@@ -261,10 +263,10 @@ export function LiquidMetalButton({
               transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, gap 0.4s ease",
-              transform: "translateZ(30px)", // Reduced to prevent extreme parallax clipping
+              transform: "translate3d(0, 0, 100px)", // Extreme Z-depth for text
               zIndex: 30,
               pointerEvents: "none",
-              backfaceVisibility: "hidden",
+              backfaceVisibility: "visible",
             }}
           >
             {viewMode === "icon" && (
@@ -308,9 +310,9 @@ export function LiquidMetalButton({
               transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translateZ(15px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
+              transform: `translate3d(0, ${isPressed ? "1px" : "0"}, 50px) scale(${isPressed ? 0.98 : 1})`, // Strong Z-separation
               zIndex: 20,
-              backfaceVisibility: "hidden",
+              backfaceVisibility: "visible",
             }}
           >
             <div
@@ -339,7 +341,7 @@ export function LiquidMetalButton({
               transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translateZ(1px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
+              transform: `translate3d(0, ${isPressed ? "1px" : "0"}, 1px) scale(${isPressed ? 0.98 : 1})`,
               zIndex: 10,
               backfaceVisibility: "hidden",
             }}
@@ -390,10 +392,10 @@ export function LiquidMetalButton({
               outline: "none",
               zIndex: 40,
               transformStyle: "preserve-3d",
-              transform: "translateZ(35px)", // Slightly higher than text to catch clicks
+              transform: "translate3d(0, 0, 110px)", // Highest layer to ensure hit area
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              overflow: "visible", // Critical for 3D extrusion
+              overflow: "visible", 
               borderRadius: "100px",
             }}
             aria-label={label}
