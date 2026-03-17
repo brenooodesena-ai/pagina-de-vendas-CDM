@@ -74,6 +74,18 @@ export function LiquidMetalButton({
             opacity: 0;
           }
         }
+        @keyframes glow-breath {
+          0%, 100% {
+            transform: scale(1);
+            opacity: 0.5;
+            filter: blur(40px);
+          }
+          50% {
+            transform: scale(1.15);
+            opacity: 0.8;
+            filter: blur(55px);
+          }
+        }
       `;
       document.head.appendChild(style);
     }
@@ -166,6 +178,22 @@ export function LiquidMetalButton({
           perspectiveOrigin: "50% 50%",
         }}
       >
+        {/* Premium Background Glow */}
+        <div 
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: `${dimensions.width * 1.4}px`,
+            height: `${dimensions.height * 2.5}px`,
+            background: "radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.1) 40%, transparent 70%)",
+            borderRadius: "50%",
+            zIndex: 0,
+            pointerEvents: "none",
+            animation: "glow-breath 4s ease-in-out infinite",
+          }}
+        />
         <div
           style={{
             position: "relative",
