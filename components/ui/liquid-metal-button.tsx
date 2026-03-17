@@ -233,10 +233,12 @@ export function LiquidMetalButton({
             width: `${dimensions.width}px`,
             height: `${dimensions.height}px`,
             transformStyle: "preserve-3d",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
             transition: isHovered 
               ? "width 0.4s ease, height 0.4s ease, gap 0.4s ease" // Faster response while hovering
               : "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
-            transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+            transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
           }}
         >
           <div
@@ -253,9 +255,10 @@ export function LiquidMetalButton({
               transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, gap 0.4s ease",
-              transform: "translateZ(20px)",
+              transform: "translateZ(40px)",
               zIndex: 30,
               pointerEvents: "none",
+              backfaceVisibility: "hidden",
             }}
           >
             {viewMode === "icon" && (
@@ -299,8 +302,9 @@ export function LiquidMetalButton({
               transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translateZ(10px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
+              transform: `translateZ(20px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
               zIndex: 20,
+              backfaceVisibility: "hidden",
             }}
           >
             <div
@@ -329,8 +333,9 @@ export function LiquidMetalButton({
               transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translateZ(0px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
+              transform: `translateZ(1px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
               zIndex: 10,
+              backfaceVisibility: "hidden",
             }}
           >
             <div
