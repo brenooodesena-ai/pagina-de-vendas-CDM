@@ -131,18 +131,18 @@ export function LiquidMetalButton({
     };
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    // Calculate rotation (delicate effect: max 10 degrees)
-    const rotateY = ((x - centerX) / centerX) * 8;
-    const rotateX = ((centerY - y) / centerY) * 8;
+    // Calculate rotation (delicate effect)
+    // Inverted Y rotation for "tilt-towards-mouse" effect (more stable)
+    const rotateY = ((x - centerX) / centerX) * 10;
+    const rotateX = ((centerY - y) / centerY) * 10;
     
     setRotate({ x: rotateX, y: rotateY });
   };
@@ -187,10 +187,15 @@ export function LiquidMetalButton({
   };
 
   return (
-    <div className="relative inline-block">
+    <div 
+      className="relative inline-block"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div
         style={{
-          perspective: "1000px",
+          perspective: "1200px", // Increased perspective for stability
           perspectiveOrigin: "50% 50%",
         }}
       >
@@ -235,8 +240,9 @@ export function LiquidMetalButton({
             transformStyle: "preserve-3d",
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
+            willChange: "transform",
             transition: isHovered 
-              ? "width 0.4s ease, height 0.4s ease, gap 0.4s ease" // Faster response while hovering
+              ? "transform 0.1s ease-out, width 0.4s ease, height 0.4s ease" // Tighter transform response
               : "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
             transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
           }}
@@ -255,7 +261,7 @@ export function LiquidMetalButton({
               transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, gap 0.4s ease",
-              transform: "translateZ(40px)",
+              transform: "translateZ(30px)", // Reduced to prevent extreme parallax clipping
               zIndex: 30,
               pointerEvents: "none",
               backfaceVisibility: "hidden",
@@ -302,7 +308,7 @@ export function LiquidMetalButton({
               transformStyle: "preserve-3d",
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translateZ(20px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
+              transform: `translateZ(15px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
               zIndex: 20,
               backfaceVisibility: "hidden",
             }}
@@ -370,9 +376,6 @@ export function LiquidMetalButton({
           <button
             ref={buttonRef}
             onClick={handleClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
             onMouseDown={() => setIsPressed(true)}
             onMouseUp={() => setIsPressed(false)}
             style={{
@@ -387,10 +390,10 @@ export function LiquidMetalButton({
               outline: "none",
               zIndex: 40,
               transformStyle: "preserve-3d",
-              transform: "translateZ(25px)",
+              transform: "translateZ(35px)", // Slightly higher than text to catch clicks
               transition:
                 "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              overflow: "hidden",
+              overflow: "visible", // Critical for 3D extrusion
               borderRadius: "100px",
             }}
             aria-label={label}
