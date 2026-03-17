@@ -264,15 +264,15 @@ export function LiquidMetalButton({
                   letterSpacing: "0.15em",
                   whiteSpace: "nowrap",
                   
-                  /* Professional Metallic Text Finish */
-                  background: "linear-gradient(to bottom, #FFFFFF 0%, #F5E1A4 40%, #D4AF37 60%, #B8860B 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  filter: "drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.5))",
+                  /* Professional White Text Finish with Visual Effects */
+                  color: "#FFFFFF",
+                  WebkitTextFillColor: "#FFFFFF",
+                  filter: "drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.6))",
+                  textShadow: "0 0 10px rgba(255, 255, 255, 0.3)",
                   
-                  /* Animated Shimmer Over Text */
-                  backgroundImage: "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.8) 50%, transparent 70%), linear-gradient(to bottom, #FFFFFF 0%, #F5E1A4 40%, #D4AF37 60%, #B8860B 100%)",
-                  backgroundSize: "200% 100%, 100% 100%",
+                  /* Refined Shimmer Over White Text */
+                  background: "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%)",
+                  backgroundSize: "200% 100%",
                   animation: "text-shimmer 4s linear infinite",
 
                   transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
