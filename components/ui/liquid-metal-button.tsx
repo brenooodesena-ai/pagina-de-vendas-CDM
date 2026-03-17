@@ -264,11 +264,9 @@ export function LiquidMetalButton({
                   letterSpacing: "0.15em",
                   whiteSpace: "nowrap",
                   
-                  /* Professional White Text Finish with Visual Effects */
+                  /* Clean White Text Finish */
                   color: "#FFFFFF",
                   WebkitTextFillColor: "#FFFFFF",
-                  filter: "drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.6))",
-                  textShadow: "0 0 10px rgba(255, 255, 255, 0.3)",
                   
                   /* Refined Shimmer Over White Text */
                   background: "linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%)",
@@ -304,7 +302,7 @@ export function LiquidMetalButton({
                 height: `${dimensions.innerHeight}px`,
                 margin: "2px",
                 borderRadius: "100px",
-                background: "linear-gradient(135deg, #CFB53B 0%, #F5E1A4 20%, #D4AF37 50%, #F5E1A4 80%, #B8860B 100%)", // Metallic 5-stop gradient
+                background: "linear-gradient(135deg, #CFB53B 0%, #FFF5C2 20%, #D4AF37 50%, #FFF5C2 80%, #B8860B 100%)", // Matched with training theme
                 boxShadow: isPressed
                   ? "inset 0px 2px 4px rgba(0, 0, 0, 0.2), inset 0px 1px 2px rgba(0, 0, 0, 0.1)"
                   : "none",
