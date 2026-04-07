@@ -9,12 +9,14 @@ interface LiquidMetalButtonProps {
   label?: string;
   onClick?: () => void;
   viewMode?: "text" | "icon";
+  width?: number; // Added width prop for dynamic sizing
 }
 
 export function LiquidMetalButton({
   label = "Get Started",
   onClick,
   viewMode = "text",
+  width,
 }: LiquidMetalButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
@@ -38,16 +40,17 @@ export function LiquidMetalButton({
         shaderHeight: 46,
       };
     } else {
+      const w = width || 340; // Default to the original compact 340px
       return {
-        width: 340, // Even larger for high impact
+        width: w, 
         height: 70, 
-        innerWidth: 336,
+        innerWidth: w - 4,
         innerHeight: 66,
-        shaderWidth: 340,
+        shaderWidth: w,
         shaderHeight: 70,
       };
     }
-  }, [viewMode]);
+  }, [viewMode, width]);
 
   useEffect(() => {
     const styleId = "shader-canvas-style-exploded";
@@ -106,9 +109,9 @@ export function LiquidMetalButton({
               u_distortion: 0,
               u_contour: 0,
               u_angle: 45,
-              u_scale: 8,
-              u_shape: 1,
-              u_offsetX: 0.1,
+              u_scale: 4, // Reduced scale for larger fluid pattern that reaches the edges
+              u_shape: 0, // Fill the entire bounding quad
+              u_offsetX: 0,
               u_offsetY: -0.1,
             },
             undefined,
@@ -175,37 +178,20 @@ export function LiquidMetalButton({
       onMouseLeave={handleMouseLeave}
     >
       <div>
-        {/* Premium Multi-layered Ambient Glow */}
+        {/* Subtle Ambient Glow - NO MARKS GUARANTEED */}
         <div 
           style={{
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: `${dimensions.width * 1.8}px`,
-            height: `${dimensions.height * 3.5}px`,
-            background: "radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 45%, transparent 75%)",
-            borderRadius: "50%",
+            width: `${dimensions.width * 1.6}px`, // Reduced from 2.5x to prevent margin clipping
+            height: `${dimensions.height * 4.5}px`, // High enough for full diffusion
+            background: "radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 25%, transparent 60%)",
             zIndex: 0,
             pointerEvents: "none",
-            filter: "blur(70px)",
-            animation: "glow-breath 6s ease-in-out infinite",
-          }}
-        />
-        <div 
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: `${dimensions.width * 1.2}px`,
-            height: `${dimensions.height * 2.2}px`,
-            background: "radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%)",
-            borderRadius: "50%",
-            zIndex: 0,
-            pointerEvents: "none",
-            filter: "blur(40px)",
-            opacity: 0.6,
+            filter: "blur(120px)", // Significantly increased for ultra-soft edges
+            animation: "glow-breath 10s ease-in-out infinite",
           }}
         />
         <div

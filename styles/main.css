@@ -7,6 +7,8 @@
     --c-blue: #3B82F6; /* Vibrant blue from reference image */
     --c-white: #FFFFFF;
     --c-off-white: rgba(255, 255, 255, 0.65); /* Faint subtext */
+    --c-mint: #70D8A3; /* Mockup matching mint green */
+    --c-mint-dark: #2D5A43; /* Darker green for checkmark backgrounds */
 
     /* Typography Precision */
     --f-main: 'Inter', sans-serif;
@@ -62,6 +64,13 @@ body {
     border-radius: 50%;
     opacity: 1;
     will-change: transform, opacity;
+}
+
+/* Optimize blur performance on mobile */
+@media (max-width: 768px) {
+    .ambient-light {
+        filter: blur(80px); /* Reduced blur for mobile GPU */
+    }
 }
 
 .light-gold {
@@ -120,6 +129,13 @@ body {
     opacity: 0.2; /* Slightly reduced for performance */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     mix-blend-mode: overlay;
+}
+
+/* Disable heavy SVG filters on mobile */
+@media (max-width: 768px) {
+    .noise-layer {
+        display: none;
+    }
 }
 
 /* --- Preloader Premium CDM --- */
@@ -273,7 +289,7 @@ body {
 }
 
 .gold-closing-area {
-    background-color: var(--c-gold); /* Reverted to gold as per user request */
+    background-color: transparent; /* Restored grid visibility */
     position: relative;
     z-index: 10;
     /* Styles for the restricted gold background */
@@ -761,15 +777,13 @@ section {
     overflow: visible;
 }
 
-/* Gold corner light accents */
+/* Central Gold Glow - Single perfectly smooth elliptical diffusion */
 .offer-card::after {
     content: '';
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background:
-        radial-gradient(ellipse at left center, rgba(212, 175, 55, 0.2) 0%, transparent 55%),
-        radial-gradient(ellipse at right center, rgba(212, 175, 55, 0.2) 0%, transparent 55%);
+    background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, transparent 75%);
     border-radius: inherit;
     z-index: 0;
 }
@@ -777,6 +791,112 @@ section {
 /* Remove noise texture as it's not in the image */
 .offer-card::before {
     display: none;
+}
+
+/* Redesigned Pricing Section - Premium Mockup Style */
+.invest-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.price-card-inner {
+    background: #111111;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.price-strikethrough {
+    font-size: 1.1rem;
+    color: #666;
+    text-decoration: line-through;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.price-main-huge {
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.price-main-huge .qty {
+    color: var(--c-white);
+    font-weight: 400;
+}
+
+.price-main-huge .val {
+    color: var(--c-gold);
+}
+
+.price-cash-sub {
+    font-size: 1rem;
+    color: #888;
+}
+
+.price-cash-sub strong {
+    color: var(--c-white);
+}
+
+/* Features List Styling */
+.features-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--c-white);
+    margin-bottom: 30px;
+    margin-top: 45px;
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 500px;
+    margin: 0 auto 40px;
+    text-align: left;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+}
+
+.feature-check {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: 1.5px solid var(--c-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--c-gold);
+}
+
+.feature-check svg {
+    width: 14px;
+    height: 14px;
+    stroke-width: 3.5;
 }
 
 /* Top Circle Indicator */
@@ -1734,3 +1854,14 @@ section {
 .global-light-1 { animation: ambientDrift 25s ease-in-out infinite; }
 .global-light-2 { animation: ambientDrift 30s ease-in-out infinite reverse; }
 .global-light-3 { animation: ambientDrift 20s ease-in-out infinite 5s; }
+
+/* Specific styling for the VSL section to ensure clean layout */
+#hero-v5 {
+    position: relative;
+    overflow: hidden;
+}
+
+.video-container {
+    position: relative;
+    z-index: 2;
+}

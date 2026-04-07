@@ -1,14 +1,19 @@
 // Core JS v4.0 - CDM Performance
-window.addEventListener('load', () => {
+const initPreloader = () => {
     const preloader = document.getElementById('preloader');
-    if (preloader) {
+    if (preloader && !preloader.classList.contains('loaded')) {
         preloader.classList.add('loaded');
-        // Fully remove after transition to free up resources
         setTimeout(() => {
             preloader.style.display = 'none';
         }, 800);
     }
-});
+};
+
+// Start hiding preloader as soon as DOM is ready, don't wait for heavy assets/iframes
+document.addEventListener('DOMContentLoaded', initPreloader);
+
+// Safety timeout: if DOMContentLoaded takes too long (e.g. slow scripts), hide preloader anyway after 2s
+setTimeout(initPreloader, 2000);
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('CDM v4.0 Initialized');

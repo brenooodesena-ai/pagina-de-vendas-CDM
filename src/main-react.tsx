@@ -6,7 +6,7 @@ const rootElement = document.getElementById('button-root')
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
-      <div className="flex justify-center p-8">
+      <div className="flex justify-center p-8 overflow-visible w-full">
         <LiquidMetalButton 
           label="Quero ter acesso" 
           onClick={() => {
@@ -14,6 +14,24 @@ if (rootElement) {
             if (pricingSection) {
               pricingSection.scrollIntoView({ behavior: 'smooth' })
             }
+          }}
+        />
+      </div>
+    </React.StrictMode>,
+  )
+}
+
+const checkoutRootElement = document.getElementById('checkout-button-root')
+if (checkoutRootElement) {
+  ReactDOM.createRoot(checkoutRootElement).render(
+    <React.StrictMode>
+      <div className="flex justify-center p-8 overflow-visible w-full">
+        <LiquidMetalButton 
+          width={420} // Larger size for the longer bottom button text
+          label="GARANTIR MEU ACESSO AGORA" 
+          onClick={() => {
+            // Redirect to Kiwify Checkout
+            window.location.href = 'https://pay.kiwify.com.br/Lezh01Z'
           }}
         />
       </div>
