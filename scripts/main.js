@@ -63,6 +63,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Objection Cards Slide-Out Logic
+    document.querySelectorAll('.obj-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const objItem = button.parentElement;
+            const isOpen = objItem.classList.contains('open');
+
+            // Close all others so cards overlap cleanly
+            document.querySelectorAll('.obj-container').forEach(item => {
+                item.classList.remove('open');
+            });
+
+            // Re-open clicked one
+            if (!isOpen) {
+                objItem.classList.add('open');
+            }
+        });
+    });
+
     // Fast Smooth Scroll Engine
     const fastScrollTo = (targetId, duration = 800) => {
         const target = document.querySelector(targetId);
@@ -214,5 +232,34 @@ document.addEventListener('DOMContentLoaded', () => {
             updateSlider(true);
             resizeTimeout = setTimeout(() => updateSlider(true), 150);
         });
+    }
+
+    // --- Journey Path Drawing Logic ---
+    const journeyPath = document.querySelector('#main-journey-path');
+    const journeySection = document.querySelector('#journey-v5');
+    
+    if (journeyPath && journeySection) {
+        const pathLength = journeyPath.getTotalLength();
+        
+        // Initial state: hide the path completely
+        journeyPath.style.strokeDasharray = `${pathLength} ${pathLength}`;
+        journeyPath.style.strokeDashoffset = pathLength;
+
+        const updatePathOnScroll = () => {
+            const sectionRect = journeySection.getBoundingClientRect();
+            const sectionHeight = sectionRect.height;
+            const windowHeight = window.innerHeight;
+            
+            const drawStart = windowHeight * 0.9; 
+            const currentScroll = drawStart - sectionRect.top;
+            
+            let progress = currentScroll / sectionHeight;
+            progress = Math.max(0, Math.min(1, progress));
+            
+            journeyPath.style.strokeDashoffset = pathLength * (1 - progress);
+        };
+
+        window.addEventListener('scroll', updatePathOnScroll, { passive: true });
+        setTimeout(updatePathOnScroll, 100);
     }
 });

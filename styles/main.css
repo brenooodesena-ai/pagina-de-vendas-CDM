@@ -26,6 +26,25 @@
     box-sizing: border-box;
 }
 
+/* Custom Gold Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0A0A0B;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--c-gold);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f0ca4f;
+}
+
+
 html {
     overflow-x: hidden;
     max-width: 100%;
@@ -222,6 +241,8 @@ body {
     display: inline-block;
     filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.1));
 }
+
+
 
 .striking-line {
     position: relative;
@@ -1294,6 +1315,95 @@ section {
     opacity: 1;
 }
 
+/* --- Decision Section (Grid Cards) --- */
+.decision-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+@media (max-width: 992px) {
+    .decision-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .decision-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.decision-card {
+    background: #111111;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 40px 30px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.decision-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212, 175, 55, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Top Accent Bar */
+.decision-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 40px;
+    width: 40px;
+    height: 3px;
+    background: var(--c-gold);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+}
+
+/* Accent Glow Effect */
+.decision-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 40px;
+    width: 40px;
+    height: 50px;
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.15) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.decision-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: var(--c-gold);
+}
+
+.decision-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5;
+}
+
+.decision-text {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+.decision-text strong, .decision-text b {
+    color: #ffffff;
+    font-weight: 700;
+}
+
 /* --- Access Highlights Section --- */
 /* --- About Me Section --- */
 #about-v5 {
@@ -1864,4 +1974,289 @@ section {
 .video-container {
     position: relative;
     z-index: 2;
+}
+/* --- Differentiators Section (Diferenciais) --- */
+#differentiators-v5 {
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Back to balanced columns */
+    align-items: center;
+    gap: 80px;
+}
+
+.diff-content {
+    text-align: left;
+}
+
+.gold-badge {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 1.5px solid var(--c-gold);
+    border-radius: 8px;
+    color: var(--c-gold);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    background: rgba(212, 175, 55, 0.05);
+}
+
+
+
+/* Mockup & Floating Cards Area */
+.diff-visual {
+    position: relative;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mockup-container {
+    width: 100%;
+    max-width: 850px; /* Balanced size */
+    position: relative;
+    z-index: 1;
+}
+
+.device-mockup {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
+    border-radius: 12px;
+    transform: scale(1.15); /* Moderate zoom to handle transparent margins */
+    transform-origin: center;
+}
+
+.floating-offer-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 18px 22px;
+    border-radius: 16px;
+    z-index: 2;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    max-width: 240px;
+}
+
+.floating-offer-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(212, 175, 55, 0.4);
+}
+
+.floating-offer-card .card-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--c-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+.floating-offer-card .card-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--c-white);
+    line-height: 1.4;
+}
+
+/* Card Positions */
+.card-pos-1 { top: 5%; left: -15%; animation: float 6s ease-in-out infinite; }
+.card-pos-2 { top: 50%; right: -20%; animation: float 6s ease-in-out infinite 1s; }
+.card-pos-3 { bottom: 10%; left: 0%; animation: float 6s ease-in-out infinite 2s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@media (max-width: 992px) {
+    .diff-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        text-align: center;
+    }
+    
+    .diff-content {
+        text-align: center;
+    }
+    
+    .diff-visual {
+        height: 500px;
+    }
+    
+    .card-pos-1 { left: 0; }
+    .card-pos-2 { right: 0; }
+    
+    .device-mockup {
+        transform: scale(1.05); /* Slightly less zoom on mobile to avoid cutoffs */
+    }
+}
+
+/* Specialized class to match "Exclusivo" effect on longer text */
+.exclusive-gold {
+    background: linear-gradient(to bottom, #FFFFFF 0%, #FFF5C2 20%, #D4AF37 60%, #B8860B 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    display: inline-block;
+}
+/* --- Journey Section (Zig-Zag Roadmap) --- */
+#journey-v5 {
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--c-bg);
+}
+
+.journey-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.journey-wrapper {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+/* SVG Line Styles */
+.journey-svg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.journey-path-bg {
+    stroke: rgba(212, 175, 55, 0.1);
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.journey-path-main {
+    stroke: var(--c-gold);
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1; /* Set by JS */
+    stroke-dashoffset: 1; /* Set by JS */
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+}
+
+/* Journey Items */
+.journey-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 120px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.journey-item:last-child {
+    margin-bottom: 0;
+}
+
+.journey-content {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    width: 40%;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.journey-item:nth-child(even) .journey-content {
+    margin-left: auto;
+}
+
+.journey-item:nth-child(odd) .journey-content {
+    margin-right: auto;
+}
+
+.journey-content:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(212, 175, 55, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.journey-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--c-gold), #8B6E37);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--c-bg);
+    margin-bottom: 20px;
+}
+
+.journey-content h3 {
+    font-size: 1.4rem;
+    color: var(--c-white);
+    margin-bottom: 15px;
+}
+
+.journey-content p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+}
+
+/* Junction Dots */
+.journey-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: var(--c-bg);
+    border: 3px solid var(--c-gold);
+    border-radius: 50%;
+    z-index: 3;
+    box-shadow: 0 0 15px var(--c-gold);
+}
+
+/* Mobile Tweaks */
+@media (max-width: 768px) {
+    .journey-svg {
+        left: 30px;
+        transform: none;
+    }
+    .journey-item {
+        justify-content: flex-start;
+        padding-left: 60px;
+    }
+    .journey-content {
+        width: 100%;
+        margin: 0 !important;
+    }
+    .journey-dot {
+        left: 30px;
+    }
 }

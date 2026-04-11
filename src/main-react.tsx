@@ -38,3 +38,21 @@ if (checkoutRootElement) {
     </React.StrictMode>,
   )
 }
+const journeyButtonRoot = document.getElementById('journey-button-root')
+if (journeyButtonRoot) {
+  ReactDOM.createRoot(journeyButtonRoot).render(
+    <React.StrictMode>
+      <div className="flex justify-center overflow-visible w-full">
+        <LiquidMetalButton 
+          label="MATRICULE-SE" 
+          onClick={() => {
+            const pricingSection = document.getElementById('pricing-v5')
+            if (pricingSection) {
+              pricingSection.scrollIntoView({ behavior: 'smooth' })
+            }
+          }}
+        />
+      </div>
+    </React.StrictMode>,
+  )
+}
