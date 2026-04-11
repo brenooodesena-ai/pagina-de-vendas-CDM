@@ -2093,14 +2093,30 @@ section {
     }
     
     .diff-visual {
-        height: 500px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
     }
-    
-    .card-pos-1 { left: 0; }
-    .card-pos-2 { right: 0; }
     
     .device-mockup {
         transform: scale(1.05); /* Slightly less zoom on mobile to avoid cutoffs */
+        margin-bottom: 30px;
+    }
+
+    /* Stack floating cards on mobile instead of absolute positioning */
+    .floating-offer-card {
+        position: relative;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        max-width: 90%;
+        width: 100%;
+        animation: none !important;
+        transform: none !important;
+        margin-bottom: 10px;
     }
 }
 
@@ -2150,6 +2166,7 @@ section {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
 }
 
 .journey-path-main {
@@ -2161,7 +2178,13 @@ section {
     stroke-dasharray: 1; /* Set by JS */
     stroke-dashoffset: 1; /* Set by JS */
     filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+    vector-effect: non-scaling-stroke;
 }
+
+/* Journey Element Hiding based on devices */
+.journey-mobile { display: none; }
+.journey-desktop { display: block; }
 
 /* Journey Items */
 .journey-item {
@@ -2182,49 +2205,44 @@ section {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    padding: 30px;
+    -webkit-backdrop-filter: blur(10px);
+    padding: 30px 40px;
     border-radius: 20px;
     width: 40%;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.journey-item:nth-child(even) .journey-content {
-    margin-left: auto;
 }
 
 .journey-item:nth-child(odd) .journey-content {
     margin-right: auto;
 }
 
-.journey-content:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(212, 175, 55, 0.3);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+.journey-item:nth-child(even) .journey-content {
+    margin-left: auto;
 }
 
 .journey-icon {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, var(--c-gold), #8B6E37);
-    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    color: var(--c-bg);
     margin-bottom: 20px;
+    color: var(--c-gold);
+    font-size: 1.2rem;
 }
 
 .journey-content h3 {
     font-size: 1.4rem;
     color: var(--c-white);
     margin-bottom: 15px;
+    font-weight: 700;
 }
 
 .journey-content p {
-    font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
     line-height: 1.6;
 }
 
@@ -2244,19 +2262,48 @@ section {
 
 /* Mobile Tweaks */
 @media (max-width: 768px) {
-    .journey-svg {
-        left: 30px;
-        transform: none;
-    }
+    .journey-desktop { display: none !important; }
+    .journey-mobile { display: block !important; }
+    
     .journey-item {
-        justify-content: flex-start;
-        padding-left: 60px;
+        margin-bottom: 80px;
     }
+    
     .journey-content {
-        width: 100%;
-        margin: 0 !important;
+        width: 65%; /* More width for text on mobile */
+        padding: 20px 15px; /* Tighter padding */
     }
-    .journey-dot {
-        left: 30px;
+    
+    .journey-item:nth-child(odd) .journey-content {
+        margin-left: auto;
+        margin-right: 0;
+    }
+    
+    .journey-item:nth-child(even) .journey-content {
+        margin-right: auto;
+        margin-left: 0;
+    }
+}
+/* Fix mobile scaling for LiquidMetalButton checkout width=420 */
+@media (max-width: 480px) {
+    #checkout-button-root {
+        transform: scale(0.65); /* Shrink button to fit 320px-390px screens */
+        transform-origin: center top;
+        margin-bottom: -30px; /* Compensate for scaled down height */
+    }
+    
+    .offer-card {
+        padding: 40px 20px 30px; /* Reduce side padding significantly */
+    }
+    
+    .price-card-inner {
+        padding: 30px 15px; /* Tighter fit for smallest screens */
+    }
+}
+@media (min-width: 481px) and (max-width: 550px) {
+    #checkout-button-root {
+        transform: scale(0.85); /* Shrink button */
+        transform-origin: center top;
+        margin-bottom: -15px; 
     }
 }

@@ -235,28 +235,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Journey Path Drawing Logic ---
-    const journeyPath = document.querySelector('#main-journey-path');
+    const desktopPath = document.querySelector('#desktop-journey-path');
+    const mobilePath = document.querySelector('#mobile-journey-path');
     const journeySection = document.querySelector('#journey-v5');
     
-    if (journeyPath && journeySection) {
-        const pathLength = journeyPath.getTotalLength();
+    if ((desktopPath || mobilePath) && journeySection) {
         
-        // Initial state: hide the path completely
-        journeyPath.style.strokeDasharray = `${pathLength} ${pathLength}`;
-        journeyPath.style.strokeDashoffset = pathLength;
+        const initPath = (path) => {
+            if (!path) return;
+            // Since we set pathLength="100" in HTML to avoid getTotalLength() bugs with non-scaling-stroke,
+            // we hardcode length logic to 100 user units.
+            const len = 100;
+            path.style.strokeDasharray = `${len} ${len}`;
+            path.style.strokeDashoffset = len;
+            path.dataset.length = len;
+        };
+        
+        initPath(desktopPath);
+        initPath(mobilePath);
 
+        const firstItem = journeySection.querySelector('.journey-item');
+        const buttonRoot = journeySection.querySelector('#journey-button-root');
+        
         const updatePathOnScroll = () => {
-            const sectionRect = journeySection.getBoundingClientRect();
-            const sectionHeight = sectionRect.height;
+            if (!firstItem || !buttonRoot) return;
+            const firstItemRect = firstItem.getBoundingClientRect();
+            const btnBottom = buttonRoot.getBoundingClientRect().bottom;
             const windowHeight = window.innerHeight;
             
-            const drawStart = windowHeight * 0.9; 
-            const currentScroll = drawStart - sectionRect.top;
+            // Começa a desenhar quando o topo do PRIMEIRO QUADRADINHO aparece na tela (em 65%)
+            const drawStart = windowHeight * 0.65; 
+            const currentScroll = drawStart - firstItemRect.top;
             
-            let progress = currentScroll / sectionHeight;
+            // Finaliza EXACTAMENTE quando a base do botão "MATRICULE-SE" aparece (toca o fim da tela, i.e btnBottom === windowHeight)
+            const totalScrollNeeded = (btnBottom - firstItemRect.top) - (windowHeight - drawStart);
+            
+            let progress = currentScroll / totalScrollNeeded;
             progress = Math.max(0, Math.min(1, progress));
             
-            journeyPath.style.strokeDashoffset = pathLength * (1 - progress);
+            if (desktopPath) desktopPath.style.strokeDashoffset = 100 * (1 - progress);
+            if (mobilePath) mobilePath.style.strokeDashoffset = 100 * (1 - progress);
         };
 
         window.addEventListener('scroll', updatePathOnScroll, { passive: true });
