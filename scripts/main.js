@@ -257,26 +257,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstItem = journeySection.querySelector('.journey-item');
         const buttonRoot = journeySection.querySelector('#journey-button-root');
         
-            const updatePathOnScroll = () => {
-                if (!firstItem || !buttonRoot) return;
-                const firstItemRect = firstItem.getBoundingClientRect();
-                const buttonRect = buttonRoot.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                
-                // Start drawing when first item is at 70% of viewport
-                const drawStart = windowHeight * 0.7; 
-                const currentScroll = drawStart - firstItemRect.top;
-                
-                // End drawing when the button center reaches 80% of viewport
-                const buttonPoint = buttonRect.top + (buttonRect.height / 2);
-                const totalScrollNeeded = (buttonPoint - firstItemRect.top) - (windowHeight * 0.2);
-                
-                let progress = currentScroll / totalScrollNeeded;
-                progress = Math.max(0, Math.min(1, progress));
-                
-                if (desktopPath) desktopPath.style.strokeDashoffset = 100 * (1 - progress);
-                if (mobilePath) mobilePath.style.strokeDashoffset = 100 * (1 - progress);
-            };
+        const updatePathOnScroll = () => {
+            if (!firstItem || !buttonRoot) return;
+            const journalWrapper = journeySection.querySelector('.journey-wrapper');
+            const firstItemRect = firstItem.getBoundingClientRect();
+            const wrapperRect = journalWrapper.getBoundingClientRect();
+            const buttonRect = buttonRoot.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // 1. Draw SVG Path (from Step 1 to end of Wrapper)
+            const drawStart = windowHeight * 0.7; 
+            const svgTotalDistance = wrapperRect.bottom - firstItemRect.top;
+            const svgProgress = Math.max(0, Math.min(1, (drawStart - firstItemRect.top) / (svgTotalDistance - (windowHeight * 0.2))));
+            
+            if (desktopPath) desktopPath.style.strokeDashoffset = 100 * (1 - svgProgress);
+            if (mobilePath) mobilePath.style.strokeDashoffset = 100 * (1 - svgProgress);
+
+            // 2. Animate CSS Connector (from end of Wrapper to Button)
+            // It should start growing after the SVG is almost full, and finish at the button
+            const buttonTarget = buttonRect.top;
+            const connectorStartPoint = wrapperRect.bottom;
+            const currentScrollPos = windowHeight * 0.8; // Use 80% scroll marker for the connector
+            
+            const connectorTotalDistance = buttonTarget - connectorStartPoint;
+            let connectorProgress = (currentScrollPos - connectorStartPoint) / connectorTotalDistance;
+            connectorProgress = Math.max(0, Math.min(1, connectorProgress));
+            
+            // Set the CSS variable for the connector height (max 60px)
+            const connectorHeight = connectorProgress * 60;
+            journeySection.querySelector('.journey-cta-container')?.style.setProperty('--connector-h', `${connectorHeight}px`);
+        };
 
         window.addEventListener('scroll', updatePathOnScroll, { passive: true });
         setTimeout(updatePathOnScroll, 100);

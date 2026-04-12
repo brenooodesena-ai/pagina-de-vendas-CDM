@@ -2223,7 +2223,7 @@ section {
     left: 50%;
     transform: translateX(-50%);
     width: 4px;
-    height: 60px;
+    height: var(--connector-h, 0px);
     background: var(--c-gold);
     z-index: 1;
 }
