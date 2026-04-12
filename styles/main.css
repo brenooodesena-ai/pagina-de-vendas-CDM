@@ -2177,7 +2177,7 @@ section {
 /* SVG Line Styles */
 .journey-svg {
     position: absolute;
-    top: -60px; /* Elevated start */
+    top: -80px; /* Maximum proximity to subtitle */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
