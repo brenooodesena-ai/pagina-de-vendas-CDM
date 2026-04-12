@@ -2176,7 +2176,7 @@ section {
 
 .journey-svg {
     position: absolute;
-    top: -235px; /* Extreme Proximity: Move line start precisely onto Subtitle */
+    top: -20px; /* Safe Clearance: Moved below the header text */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
