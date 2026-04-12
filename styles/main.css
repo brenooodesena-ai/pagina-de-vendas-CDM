@@ -2176,11 +2176,11 @@ section {
 
 .journey-svg {
     position: absolute;
-    top: -200px; /* Surgical elevation: moves line but NOT text */
+    top: -300px; /* Extreme surgical elevation: moves line only */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    height: calc(100% + 200px);
+    height: calc(100% + 300px);
     z-index: 1;
     pointer-events: none;
     overflow: visible;
