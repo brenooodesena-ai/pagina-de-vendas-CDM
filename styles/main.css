@@ -382,6 +382,7 @@ section {
     display: flex;
     align-items: center;
     padding-top: 100px;
+    padding-bottom: 0 !important; /* Zero gap between sections */
 }
 
 /* Bring pricing section flush with section above */
@@ -2156,7 +2157,7 @@ section {
 }
 /* --- Journey Section (Zig-Zag Roadmap) --- */
 #journey-v5 {
-    padding: 40px 0 0; /* Reduced to pull header up */
+    padding: 0 0 0 !important; /* Zero top gap */
     position: relative;
     overflow: hidden;
     background: var(--c-bg);
@@ -2180,14 +2181,13 @@ section {
     padding: 40px 0; /* Restored internal spacing */
 }
 
-/* SVG Line Styles */
 .journey-svg {
     position: absolute;
-    top: -220px; /* Massive offset to match the 4.5-grid-square gap */
+    top: -300px; /* Nuclear offset to reach across sections if needed */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    height: 100%;
+    height: calc(100% + 300px); /* Compensate for the top shift */
     z-index: 1;
     pointer-events: none;
     overflow: visible;
