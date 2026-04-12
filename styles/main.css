@@ -2178,12 +2178,13 @@ section {
 .journey-svg {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
     height: 100%;
     z-index: 1;
     pointer-events: none;
-    overflow: visible; /* Crucial for drawing path across boundaries */
+    overflow: visible; /* Extended path hits the button */
 }
 
 .journey-path-bg {
@@ -2201,20 +2202,11 @@ section {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
+    stroke-dasharray: 1; /* Set by JS */
+    stroke-dashoffset: 1; /* Set by JS */
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.25, 1, 0.5, 1);
     vector-effect: non-scaling-stroke;
-    stroke-dasharray: 10000; /* Large enough default */
-    stroke-dashoffset: 10000;
-    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
-    transition: stroke-dashoffset 0.1s linear; /* Responsive update */
-}
-
-/* Container for the dynamic journey CTA (no static line needed anymore) */
-.journey-cta-container {
-    position: relative;
-    margin-top: 60px !important;
-    display: flex;
-    justify-content: center;
-    z-index: 5;
 }
 
 /* Journey Element Hiding based on devices */

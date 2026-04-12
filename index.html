@@ -87,20 +87,20 @@
                         <p style="color: rgba(255,255,255,0.6); font-size: 1.1rem; max-width: 600px; margin: 15px auto 0;">O mapa passo a passo que vai tirar você do zero até o topo do mercado digital.</p>
                     </div>
                     
-                    <!-- Dynamic Journey SVG (Calculated by JS) -->
-                    <svg class="journey-svg journey-desktop" id="svg-desktop">
-                        <path class="journey-path-bg" id="desktop-path-bg" />
-                        <path class="journey-path-main" id="desktop-path-main" />
-                    </svg>
-
-                    <svg class="journey-svg journey-mobile" id="svg-mobile">
-                        <path class="journey-path-bg" id="mobile-path-bg" />
-                        <path class="journey-path-main" id="mobile-path-main" />
-                    </svg>
-                    
                     <div class="journey-wrapper">
+                        <!-- Desktop SVG Spine -->
+                        <svg class="journey-svg journey-desktop" viewBox="0 0 1000 1450">
+                            <path class="journey-path-bg" d="M500,0 V100 H200 V350 H800 V600 H200 V850 H800 V1100 H200 V1350 H500 V1550" />
+                            <path class="journey-path-main" id="desktop-journey-path" d="M500,0 V100 H200 V350 H800 V600 H200 V850 H800 V1100 H200 V1350 H500 V1550" pathLength="100" />
+                        </svg>
+
+                        <!-- Mobile SVG Spine -->
+                        <svg class="journey-svg journey-mobile" viewBox="0 0 1000 1450">
+                            <path class="journey-path-bg" d="M500,0 V100 H350 V350 H650 V600 H350 V850 H650 V1100 H350 V1350 H500 V1550" />
+                            <path class="journey-path-main" id="mobile-journey-path" d="M500,0 V100 H350 V350 H650 V600 H350 V850 H650 V1100 H350 V1350 H500 V1550" pathLength="100" />
+                        </svg>
                         
-                        <!-- Step 1 (Right) -->
+                        <!-- Step 1 (Left) -->
                         <div class="journey-item reveal">
                             <div class="journey-content">
                                 <div class="journey-icon"><i class="fas fa-compass"></i></div>
@@ -109,7 +109,7 @@
                             </div>
                         </div>
 
-                        <!-- Step 2 (Left) -->
+                        <!-- Step 2 (Right) -->
                         <div class="journey-item reveal">
                             <div class="journey-content">
                                 <div class="journey-icon"><i class="fas fa-crown"></i></div>
@@ -118,7 +118,7 @@
                             </div>
                         </div>
 
-                        <!-- Step 3 (Right) -->
+                        <!-- Step 3 (Left) -->
                         <div class="journey-item reveal">
                             <div class="journey-content">
                                 <div class="journey-icon"><i class="fas fa-network-wired"></i></div>
@@ -127,7 +127,7 @@
                             </div>
                         </div>
 
-                        <!-- Step 4 (Left) -->
+                        <!-- Step 4 (Right) -->
                         <div class="journey-item reveal">
                             <div class="journey-content">
                                 <div class="journey-icon"><i class="fas fa-trophy"></i></div>
@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         
-                        <!-- Step 5 (Right) -->
+                        <!-- Step 5 (Left) -->
                         <div class="journey-item reveal">
                             <div class="journey-content">
                                 <div class="journey-icon"><i class="fas fa-rocket"></i></div>
@@ -149,7 +149,7 @@
                     </div>
 
                     <!-- CTA at the end of the journey -->
-                    <div class="text-center journey-cta-container reveal" style="margin-top: 60px; position: relative; z-index: 3;">
+                    <div class="text-center reveal" style="margin-top: 60px; position: relative; z-index: 3;">
                         <div id="journey-button-root"></div>
                     </div>
                     
