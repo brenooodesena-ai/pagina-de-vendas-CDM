@@ -2091,11 +2091,14 @@ section {
     }
     
     .diff-visual {
-        height: auto;
+        min-height: 480px; /* Force height to contain absolute floating cards */
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        justify-content: center;
+        position: relative;
+        gap: 0;
+        margin-top: 40px;
     }
     
     .device-mockup {
@@ -2103,18 +2106,43 @@ section {
         margin-bottom: 30px;
     }
 
-    /* Stack floating cards on mobile instead of absolute positioning */
+    /* Re-enable and scale floating cards on mobile */
     .floating-offer-card {
-        position: relative;
-        top: auto !important;
-        bottom: auto !important;
-        left: auto !important;
-        right: auto !important;
-        max-width: 90%;
-        width: 100%;
-        animation: none !important;
-        transform: none !important;
-        margin-bottom: 10px;
+        position: absolute;
+        width: 260px; /* Slightly narrower for mobile base */
+        max-width: none;
+        padding: 15px;
+        transform-origin: center center;
+        z-index: 10;
+        animation: float-mobile 6s ease-in-out infinite;
+    }
+
+    .floating-offer-card .card-label { font-size: 0.65rem; margin-bottom: 5px; }
+    .floating-offer-card .card-text { font-size: 0.75rem; line-height: 1.3; }
+
+    /* Fine-tuned positions to surround MacBook on mobile screens */
+    .floating-offer-card.card-pos-1 { 
+        top: 0%; 
+        left: -8%; 
+        transform: scale(0.65);
+        animation-delay: 0s;
+    }
+    .floating-offer-card.card-pos-2 { 
+        top: 45%; 
+        right: -12%; 
+        transform: scale(0.65);
+        animation-delay: 1s;
+    }
+    .floating-offer-card.card-pos-3 { 
+        bottom: 0%; 
+        left: -10%; 
+        transform: scale(0.65);
+        animation-delay: 2s;
+    }
+
+    @keyframes float-mobile {
+        0%, 100% { transform: scale(0.65) translateY(0); }
+        50% { transform: scale(0.65) translateY(-10px); }
     }
 }
 
