@@ -2156,7 +2156,7 @@ section {
 }
 /* --- Journey Section (Zig-Zag Roadmap) --- */
 #journey-v5 {
-    padding: 80px 0 0; /* Restored original breathing room */
+    padding: 40px 0 0; /* Reduced to pull header up */
     position: relative;
     overflow: hidden;
     background: var(--c-bg);
@@ -2164,7 +2164,13 @@ section {
 
 .journey-header {
     text-align: center;
-    margin-bottom: 40px; /* Restored gap for cards */
+    margin-bottom: 10px; /* Minimal gap */
+}
+
+.journey-header .section-title,
+.journey-header .section-subtitle {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 .journey-wrapper {
@@ -2177,7 +2183,7 @@ section {
 /* SVG Line Styles */
 .journey-svg {
     position: absolute;
-    top: -80px; /* Maximum proximity to subtitle */
+    top: -220px; /* Massive offset to match the 4.5-grid-square gap */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
