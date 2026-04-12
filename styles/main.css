@@ -2201,11 +2201,31 @@ section {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke-dasharray: 1; /* Set by JS */
-    stroke-dashoffset: 1; /* Set by JS */
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 100; /* Unitless for pathLength="100" */
+    stroke-dashoffset: 100;
     filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
     transition: stroke-dashoffset 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-    vector-effect: non-scaling-stroke;
+}
+
+/* Connector line to bridge the animation gap to the button */
+.journey-cta-container {
+    position: relative;
+    margin-top: 60px !important;
+    display: flex;
+    justify-content: center;
+}
+
+.journey-cta-container::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 60px;
+    background: var(--c-gold);
+    z-index: 1;
 }
 
 /* Journey Element Hiding based on devices */
