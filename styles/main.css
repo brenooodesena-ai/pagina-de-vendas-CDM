@@ -1042,27 +1042,25 @@ section {
 }
 
 .offer-cta-subtext {
-    font-size: clamp(0.9rem, 2.8vw, 1.2rem);
+    font-size: clamp(0.75rem, 3.5vw, 1.2rem); /* Slightly smaller base for very narrow screens */
     width: fit-content;
     white-space: nowrap;
     max-width: 95%;
     font-weight: 800;
     font-style: normal;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em; /* Tighter letter spacing to prevent overflow */
     text-transform: uppercase;
-    margin: 15px auto 40px !important; /* Fine-tuned upward shift */
+    margin: 15px auto 40px !important; 
     text-align: center;
     display: inline-block;
     
-    /* The "Balãozinho" Style - Solid Black */
     background-color: #000;
-    padding: 12px 35px;
+    padding: 10px 20px; /* Reduced padding for mobile naturally */
     border-radius: 100px;
     border: 1px solid rgba(212, 175, 55, 0.4);
     position: relative;
     z-index: 5;
     
-    /* Internal Gold Glow - as requested */
     box-shadow: 
         0 15px 35px rgba(0, 0, 0, 0.5),
         inset 0 0 20px rgba(212, 175, 55, 0.3);
@@ -2284,26 +2282,30 @@ section {
         margin-left: 0;
     }
 }
-/* Fix mobile scaling for LiquidMetalButton checkout width=420 */
-@media (max-width: 480px) {
+/* Reset mobile scaling for LiquidMetalButton - we will use responsive width in React instead */
+@media (max-width: 550px) {
     #checkout-button-root {
-        transform: scale(0.65); /* Shrink button to fit 320px-390px screens */
-        transform-origin: center top;
-        margin-bottom: -30px; /* Compensate for scaled down height */
+        transform: none !important;
+        margin-bottom: 0 !important;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        overflow: visible;
     }
     
     .offer-card {
-        padding: 40px 20px 30px; /* Reduce side padding significantly */
+        padding: 40px 10px 30px; /* Extreme tight side padding for mobile */
+        width: 100%;
+        max-width: 100%;
     }
     
     .price-card-inner {
-        padding: 30px 15px; /* Tighter fit for smallest screens */
+        padding: 30px 10px;
+        width: 100%;
     }
-}
-@media (min-width: 481px) and (max-width: 550px) {
-    #checkout-button-root {
-        transform: scale(0.85); /* Shrink button */
-        transform-origin: center top;
-        margin-bottom: -15px; 
+
+    .offer-cta-subtext {
+        padding: 8px 15px; /* Even tighter for mobile */
+        font-size: 0.8rem;
     }
 }
