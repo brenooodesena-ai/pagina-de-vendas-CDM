@@ -87,18 +87,18 @@
                         <p style="color: rgba(255,255,255,0.6); font-size: 1.1rem; max-width: 600px; margin: 15px auto 0;">O mapa passo a passo que vai tirar você do zero até o topo do mercado digital.</p>
                     </div>
                     
-                    <div class="journey-wrapper">
-                        <!-- Desktop SVG Spine -->
-                        <svg class="journey-svg journey-desktop" viewBox="0 0 1000 1450" preserveAspectRatio="none">
-                            <path class="journey-path-bg" d="M500,0 V100 H800 V350 H200 V600 H800 V850 H200 V1100 H800 V1350 H500 V1450" />
-                            <path class="journey-path-main" id="desktop-journey-path" d="M500,0 V100 H800 V350 H200 V600 H800 V850 H200 V1100 H800 V1350 H500 V1450" pathLength="100" />
-                        </svg>
+                    <!-- Dynamic Journey SVG (Calculated by JS) -->
+                    <svg class="journey-svg journey-desktop" id="svg-desktop">
+                        <path class="journey-path-bg" id="desktop-path-bg" />
+                        <path class="journey-path-main" id="desktop-path-main" />
+                    </svg>
 
-                        <!-- Mobile SVG Spine -->
-                        <svg class="journey-svg journey-mobile" viewBox="0 0 1000 1450" preserveAspectRatio="none">
-                            <path class="journey-path-bg" d="M500,0 V100 H650 V350 H350 V600 H650 V850 H350 V1100 H650 V1350 H500 V1450" />
-                            <path class="journey-path-main" id="mobile-journey-path" d="M500,0 V100 H650 V350 H350 V600 H650 V850 H350 V1100 H650 V1350 H500 V1450" pathLength="100" />
-                        </svg>
+                    <svg class="journey-svg journey-mobile" id="svg-mobile">
+                        <path class="journey-path-bg" id="mobile-path-bg" />
+                        <path class="journey-path-main" id="mobile-path-main" />
+                    </svg>
+                    
+                    <div class="journey-wrapper">
                         
                         <!-- Step 1 (Right) -->
                         <div class="journey-item reveal">
