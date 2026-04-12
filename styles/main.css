@@ -2222,6 +2222,10 @@ section {
     width: 100%;
 }
 
+.journey-item:first-of-type {
+    margin-top: -40px !important; /* Pull Square 1 closer to subtitle lead-in */
+}
+
 .journey-item:last-child {
     margin-bottom: 0;
 }
