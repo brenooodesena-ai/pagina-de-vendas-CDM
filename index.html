@@ -89,15 +89,15 @@
                     
                     <div class="journey-wrapper">
                         <!-- Desktop SVG Spine -->
-                        <svg class="journey-svg journey-desktop" viewBox="0 0 1000 1450">
-                            <path class="journey-path-bg" d="M500,0 V110 H200 V360 H700 V610 H200 V860 H700 V1110 H200 V1360 H500 V1560" />
-                            <path class="journey-path-main" id="desktop-journey-path" d="M500,0 V110 H200 V360 H700 V610 H200 V860 H700 V1110 H200 V1360 H500 V1560" pathLength="100" />
+                        <svg class="journey-svg journey-desktop" viewBox="0 0 1000 1800">
+                            <path class="journey-path-bg" d="M500,0 V110 H200 V360 H700 V610 H200 V860 H700 V1110 H200 V1360 H500 V1650" />
+                            <path class="journey-path-main" id="desktop-journey-path" d="M500,0 V110 H200 V360 H700 V610 H200 V860 H700 V1110 H200 V1360 H500 V1650" pathLength="100" />
                         </svg>
 
                         <!-- Mobile SVG Spine -->
-                        <svg class="journey-svg journey-mobile" viewBox="0 0 1000 1450">
-                            <path class="journey-path-bg" d="M500,0 V110 H350 V360 H650 V610 H350 V860 H650 V1110 H350 V1360 H500 V1560" />
-                            <path class="journey-path-main" id="mobile-journey-path" d="M500,0 V110 H350 V360 H650 V610 H350 V860 H650 V1110 H350 V1360 H500 V1560" pathLength="100" />
+                        <svg class="journey-svg journey-mobile" viewBox="0 0 1000 1800">
+                            <path class="journey-path-bg" d="M500,0 V110 H350 V360 H650 V610 H350 V860 H650 V1110 H350 V1360 H500 V1650" />
+                            <path class="journey-path-main" id="mobile-journey-path" d="M500,0 V110 H350 V360 H650 V610 H350 V860 H650 V1110 H350 V1360 H500 V1650" pathLength="100" />
                         </svg>
                         
                         <!-- Step 1 (Left) -->
@@ -146,12 +146,13 @@
                         </div>
                         
                         <!-- Route Dots removed per user request -->
+
+                        <!-- Final Button anchored to the path -->
+                        <div class="text-center reveal" style="margin-top: 60px; padding-bottom: 80px; position: relative; z-index: 10;">
+                            <div id="journey-button-root"></div>
+                        </div>
                     </div>
 
-                    <!-- CTA at the end of the journey -->
-                    <div class="text-center reveal" style="margin-top: 60px; position: relative; z-index: 3;">
-                        <div id="journey-button-root"></div>
-                    </div>
                     
                     <!-- Section Divider -->
                     <div class="section-divider"></div>
