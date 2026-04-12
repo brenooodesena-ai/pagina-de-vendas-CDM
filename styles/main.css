@@ -2171,12 +2171,12 @@ section {
     position: relative;
     max-width: 900px;
     margin: 0 auto; /* Removed independent wrapper shift */
-    padding: 40px 0; /* Restored internal spacing */
+    padding: 40px 0; /* Restored symmetrical spacing */
 }
 
 .journey-svg {
     position: absolute;
-    top: -300px; /* Extreme surgical elevation: moves line only */
+    top: -300px; /* Reset: Independent surgical elevation for high-proximity line */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -2223,7 +2223,7 @@ section {
 }
 
 .journey-item:first-of-type {
-    margin-top: -75px !important; /* Absolute maximum elevation to meet minimal lead-in */
+    margin-top: -75px !important; /* Restore: Absolute maximum elevation for minimal lead-in */
 }
 
 .journey-item:last-child {
