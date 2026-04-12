@@ -2232,17 +2232,17 @@ section {
 }
 
 .journey-content {
-    background: #111111; /* Solid Matte Black */
-    border: 1px solid rgba(212, 175, 55, 0.4);
+    background: linear-gradient(145deg, #1e1e1e, #111111); /* Soft Handcrafted Matte Gradient */
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     width: 320px;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
-    box-shadow: 0 15px 45px rgba(0,0,0,0.9);
-    padding: 35px 25px 25px; /* Extra top padding for badge */
+    text-align: left; /* Aligned exactly as the reference photo */
+    box-shadow: 0 15px 45px rgba(0,0,0,0.8);
+    padding: 30px;
     position: relative;
 }
 
@@ -2257,34 +2257,33 @@ section {
 }
 
 .journey-icon {
-    position: absolute;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     background: #1a1a1a;
-    border: 2px solid #d4af37;
+    border: 1px solid rgba(212, 175, 55, 0.3);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #d4af37;
-    font-size: 1.2rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    z-index: 10;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .journey-content h3 {
-    color: #ffffff; /* Crisp White */
-    font-size: 1.4rem;
+    color: #ffffff;
+    font-size: 1.3rem;
     margin-bottom: 12px;
+    text-align: left;
+    font-weight: 700;
 }
 
 .journey-content p {
-    color: rgba(255, 255, 255, 0.7); /* Muted White */
+    color: rgba(255, 255, 255, 0.6);
     font-size: 0.95rem;
     line-height: 1.6;
+    text-align: left;
 }
 
 
