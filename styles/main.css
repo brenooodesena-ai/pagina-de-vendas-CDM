@@ -2223,7 +2223,7 @@ section {
 }
 
 .journey-item:first-of-type {
-    margin-top: -40px !important; /* Pull Square 1 closer to subtitle lead-in */
+    margin-top: -60px !important; /* Extremely high Square 1 to meet ultra-short lead-in */
 }
 
 .journey-item:last-child {
