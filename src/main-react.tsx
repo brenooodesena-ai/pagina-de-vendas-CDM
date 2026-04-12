@@ -23,15 +23,17 @@ if (rootElement) {
 
 const checkoutRootElement = document.getElementById('checkout-button-root')
 if (checkoutRootElement) {
-  // Use a responsive width: 420 for desktop, ~330 for small mobile screens
+  // Use a responsive width: 420 for desktop, and more generous width for mobile
   const isMobile = window.innerWidth < 480;
-  const responsiveWidth = isMobile ? Math.min(330, window.innerWidth - 60) : 420;
+  const responsiveWidth = isMobile ? Math.min(350, window.innerWidth - 30) : 420;
+  const responsiveFontSize = isMobile ? "15px" : "18px";
 
   ReactDOM.createRoot(checkoutRootElement).render(
     <React.StrictMode>
       <div className="flex justify-center p-8 overflow-visible w-full">
         <LiquidMetalButton 
           width={responsiveWidth} 
+          fontSize={responsiveFontSize}
           label="GARANTIR MEU ACESSO AGORA" 
           onClick={() => {
             // Redirect to Kiwify Checkout

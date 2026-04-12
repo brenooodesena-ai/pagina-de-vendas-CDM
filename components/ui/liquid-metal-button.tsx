@@ -10,6 +10,7 @@ interface LiquidMetalButtonProps {
   onClick?: () => void;
   viewMode?: "text" | "icon";
   width?: number; // Added width prop for dynamic sizing
+  fontSize?: string; // Optional font size for longer labels
 }
 
 export function LiquidMetalButton({
@@ -17,6 +18,7 @@ export function LiquidMetalButton({
   onClick,
   viewMode = "text",
   width,
+  fontSize,
 }: LiquidMetalButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
@@ -235,7 +237,7 @@ export function LiquidMetalButton({
             {viewMode === "text" && (
               <span
                 style={{
-                  fontSize: "18px",
+                  fontSize: fontSize || "18px",
                   color: "#FFFFFF",
                   fontFamily: "'Inter', sans-serif",
                   fontWeight: 800,
