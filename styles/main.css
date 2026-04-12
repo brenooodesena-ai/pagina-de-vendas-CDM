@@ -2156,7 +2156,7 @@ section {
 }
 /* --- Journey Section (Zig-Zag Roadmap) --- */
 #journey-v5 {
-    padding: 30px 0 0; /* Reduced even more */
+    padding: 20px 0 0 !important; /* Extremely compact */
     position: relative;
     overflow: hidden;
     background: var(--c-bg);
@@ -2170,8 +2170,8 @@ section {
 .journey-wrapper {
     position: relative;
     max-width: 900px;
-    margin: 0 auto;
-    padding: 0px 0 40px; /* No top padding */
+    margin: -40px auto 0 !important; /* Pull path and cards UP into the header */
+    padding: 0 !important;
 }
 
 /* SVG Line Styles */
@@ -2218,7 +2218,8 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 120px;
+    margin-bottom: 110px;
+    margin-top: 0 !important;
     position: relative;
     z-index: 2;
     width: 100%;
@@ -2239,11 +2240,11 @@ section {
 }
 
 .journey-item:nth-child(odd) .journey-content {
-    margin-right: auto;
+    margin-left: auto; /* Match Right Path H800 */
 }
 
 .journey-item:nth-child(even) .journey-content {
-    margin-left: auto;
+    margin-right: auto; /* Match Left Path H200 */
 }
 
 .journey-icon {
