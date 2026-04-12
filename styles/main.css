@@ -2223,7 +2223,7 @@ section {
 }
 
 .journey-item:first-of-type {
-    margin-top: -60px !important; /* Extremely high Square 1 to meet ultra-short lead-in */
+    margin-top: -75px !important; /* Absolute maximum elevation to meet minimal lead-in */
 }
 
 .journey-item:last-child {
