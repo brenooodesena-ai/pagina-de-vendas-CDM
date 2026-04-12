@@ -1983,7 +1983,7 @@ section {
 .diff-grid {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Back to balanced columns */
-    align-items: center;
+    align-items: start;
     gap: 80px;
 }
 
@@ -2128,7 +2128,7 @@ section {
 }
 /* --- Journey Section (Zig-Zag Roadmap) --- */
 #journey-v5 {
-    padding: 100px 0;
+    padding: 100px 0 0;
     position: relative;
     overflow: hidden;
     background: var(--c-bg);
