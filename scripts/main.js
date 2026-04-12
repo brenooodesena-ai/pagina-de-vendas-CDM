@@ -257,25 +257,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstItem = journeySection.querySelector('.journey-item');
         const buttonRoot = journeySection.querySelector('#journey-button-root');
         
-        const updatePathOnScroll = () => {
-            if (!firstItem || !buttonRoot) return;
-            const firstItemRect = firstItem.getBoundingClientRect();
-            const btnBottom = buttonRoot.getBoundingClientRect().bottom;
-            const windowHeight = window.innerHeight;
-            
-            // Começa a desenhar quando o topo do PRIMEIRO QUADRADINHO aparece na tela (em 65%)
-            const drawStart = windowHeight * 0.65; 
-            const currentScroll = drawStart - firstItemRect.top;
-            
-            // Finaliza EXACTAMENTE quando a base do botão "MATRICULE-SE" aparece (toca o fim da tela, i.e btnBottom === windowHeight)
-            const totalScrollNeeded = (btnBottom - firstItemRect.top) - (windowHeight - drawStart);
-            
-            let progress = currentScroll / totalScrollNeeded;
-            progress = Math.max(0, Math.min(1, progress));
-            
-            if (desktopPath) desktopPath.style.strokeDashoffset = 100 * (1 - progress);
-            if (mobilePath) mobilePath.style.strokeDashoffset = 100 * (1 - progress);
-        };
+            const updatePathOnScroll = () => {
+                if (!firstItem || !buttonRoot) return;
+                const firstItemRect = firstItem.getBoundingClientRect();
+                const buttonRect = buttonRoot.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // Start drawing when first item is at 70% of viewport
+                const drawStart = windowHeight * 0.7; 
+                const currentScroll = drawStart - firstItemRect.top;
+                
+                // End drawing when the button center reaches 80% of viewport
+                const buttonPoint = buttonRect.top + (buttonRect.height / 2);
+                const totalScrollNeeded = (buttonPoint - firstItemRect.top) - (windowHeight * 0.2);
+                
+                let progress = currentScroll / totalScrollNeeded;
+                progress = Math.max(0, Math.min(1, progress));
+                
+                if (desktopPath) desktopPath.style.strokeDashoffset = 100 * (1 - progress);
+                if (mobilePath) mobilePath.style.strokeDashoffset = 100 * (1 - progress);
+            };
 
         window.addEventListener('scroll', updatePathOnScroll, { passive: true });
         setTimeout(updatePathOnScroll, 100);
