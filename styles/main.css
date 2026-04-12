@@ -2176,11 +2176,11 @@ section {
 
 .journey-svg {
     position: absolute;
-    top: -300px; /* Reset: Independent surgical elevation for high-proximity line */
+    top: -65px; /* Independent elevation to reach Subtitle after section shift */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    height: calc(100% + 300px);
+    height: calc(100% + 100px);
     z-index: 1;
     pointer-events: none;
     overflow: visible;
@@ -2223,7 +2223,7 @@ section {
 }
 
 .journey-item:first-of-type {
-    margin-top: -75px !important; /* Restore: Absolute maximum elevation for minimal lead-in */
+    margin-top: 155px !important; /* Positioned exactly on the first horizontal turn V400 */
 }
 
 .journey-item:last-child {
