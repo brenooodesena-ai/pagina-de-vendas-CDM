@@ -2216,7 +2216,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 120px;
+    margin-bottom: 130px; /* Synchronized with 250-unit SVG vertical steps */
     position: relative;
     z-index: 2;
     width: 100%;
@@ -2239,11 +2239,13 @@ section {
 }
 
 .journey-item:nth-child(odd) .journey-content {
-    margin-right: auto; /* Match Left Path H200 */
+    margin-right: auto;
+    margin-left: 20px; /* Precise centering on H200 line */
 }
 
 .journey-item:nth-child(even) .journey-content {
-    margin-left: auto; /* Match Right Path H800 */
+    margin-left: auto;
+    margin-right: 20px; /* Precise centering on H800 line */
 }
 
 .journey-icon {
