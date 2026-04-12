@@ -2242,12 +2242,12 @@ section {
     box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 
-.journey-item:nth-child(odd) .journey-content {
+.journey-item:nth-of-type(odd) .journey-content {
     margin-right: auto;
     margin-left: 20px; /* Precise centering on H200 line */
 }
 
-.journey-item:nth-child(even) .journey-content {
+.journey-item:nth-of-type(even) .journey-content {
     margin-left: auto;
     margin-right: 20px; /* Precise centering on H800 line */
 }
