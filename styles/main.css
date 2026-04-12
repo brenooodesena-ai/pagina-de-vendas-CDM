@@ -2216,10 +2216,10 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 150px; /* Stable height for geometric alignment */
-    margin-bottom: 100px; /* Total jump = 150 + 100 = 250 units */
+    height: 160px; /* Increased slightly for badge room */
+    margin-bottom: 100px; 
     position: relative;
-    z-index: 2;
+    z-index: 5; /* Keep cards on top */
     width: 100%;
 }
 
@@ -2232,19 +2232,18 @@ section {
 }
 
 .journey-content {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 25px 30px;
+    background: #111111; /* Solid Matte Black */
+    border: 1px solid rgba(212, 175, 55, 0.4);
     border-radius: 20px;
     width: 320px;
-    height: 100%; /* Fill the stable container */
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.9);
+    padding: 35px 25px 25px; /* Extra top padding for badge */
+    position: relative;
 }
 
 .journey-item:nth-of-type(odd) .journey-content {
@@ -2258,31 +2257,38 @@ section {
 }
 
 .journey-icon {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0) 100%);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: #1a1a1a;
+    border: 2px solid #d4af37;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
-    color: var(--c-gold);
+    color: #d4af37;
     font-size: 1.2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 10;
 }
 
 .journey-content h3 {
+    color: #ffffff; /* Crisp White */
     font-size: 1.4rem;
-    color: var(--c-white);
-    margin-bottom: 15px;
-    font-weight: 700;
+    margin-bottom: 12px;
 }
 
 .journey-content p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7); /* Muted White */
+    font-size: 0.95rem;
     line-height: 1.6;
 }
+
+
+
 
 /* Junction Dots */
 .journey-dot {
