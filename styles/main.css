@@ -2164,7 +2164,7 @@ section {
 
 .journey-header {
     text-align: center;
-    margin-bottom: 20px; /* Shortened: tighter proximity to roadmap */
+    margin-bottom: 40px; /* Lowered: provided more clearance from subtitle */
 }
 
 .journey-wrapper {
@@ -2176,7 +2176,7 @@ section {
 
 .journey-svg {
     position: absolute;
-    top: -20px; /* Safe Clearance: Moved below the header text */
+    top: 0px; /* Reset: Natural alignment to Wrapper top */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
