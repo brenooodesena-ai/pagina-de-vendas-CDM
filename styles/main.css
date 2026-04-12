@@ -2244,12 +2244,12 @@ section {
 
 .journey-item:nth-of-type(odd) .journey-content {
     margin-right: auto;
-    margin-left: 20px; /* Precise centering on H200 line */
+    margin-left: 40px; /* Center at X=200 (40 + 160) */
 }
 
 .journey-item:nth-of-type(even) .journey-content {
     margin-left: auto;
-    margin-right: 20px; /* Precise centering on H800 line */
+    margin-right: 40px; /* Center at X=700 (900 - 40 - 160) */
 }
 
 .journey-icon {
