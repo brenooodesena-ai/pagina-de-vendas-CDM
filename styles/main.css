@@ -2156,7 +2156,7 @@ section {
 }
 /* --- Journey Section (Zig-Zag Roadmap) --- */
 #journey-v5 {
-    padding: 80px 0 0; /* Restored stable layout */
+    padding: 40px 0 0; /* Shortened: reduced top gap */
     position: relative;
     overflow: hidden;
     background: var(--c-bg);
@@ -2164,7 +2164,7 @@ section {
 
 .journey-header {
     text-align: center;
-    margin-bottom: 60px; /* Comfortable gap for branding */
+    margin-bottom: 20px; /* Shortened: tighter proximity to roadmap */
 }
 
 .journey-wrapper {
@@ -2176,7 +2176,7 @@ section {
 
 .journey-svg {
     position: absolute;
-    top: -65px; /* Independent elevation to reach Subtitle after section shift */
+    top: -235px; /* Extreme Proximity: Move line start precisely onto Subtitle */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
