@@ -2228,20 +2228,22 @@ section {
 
 .journey-content {
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.3);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 30px 40px;
+    padding: 25px 30px;
     border-radius: 20px;
-    width: 40%;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 
 .journey-item:nth-child(odd) .journey-content {
-    margin-left: auto; /* Match Right Path H800 */
+    margin-right: auto; /* Match Left Path H200 */
 }
 
 .journey-item:nth-child(even) .journey-content {
-    margin-right: auto; /* Match Left Path H200 */
+    margin-left: auto; /* Match Right Path H800 */
 }
 
 .journey-icon {
