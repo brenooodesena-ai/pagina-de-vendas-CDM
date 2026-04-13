@@ -2316,32 +2316,107 @@ section {
     box-shadow: 0 0 15px var(--c-gold);
 }
 
-/* Mobile Tweaks */
+/* ===== MOBILE JOURNEY — Full Rebuild ===== */
 @media (max-width: 768px) {
     .journey-desktop { display: none !important; }
     .journey-mobile { display: block !important; }
-    
+
+    /* Wrapper ocupa toda a largura no mobile */
+    .journey-wrapper {
+        max-width: 100%;
+        padding: 20px 0;
+    }
+
+    /* SVG se estica para toda a altura do wrapper */
+    .journey-svg {
+        width: 100%;
+        height: calc(100% + 80px);
+        top: 0;
+    }
+
+    /* 
+     * Cada item representa 250 unidades do SVG (360→610→860...)
+     * No SVG viewBox=400: os desvios são em X=80 (20%) e X=320 (80%)
+     * justify-content é sobrescrito por odd/even abaixo
+     */
     .journey-item {
-        height: 250px; /* Keep alignment consistent with desktop SVG units */
+        height: auto;
+        min-height: 210px;
+        margin-bottom: 40px;
+        align-items: center;
+        justify-content: flex-start; /* Default; será sobrescrito */
+        padding: 0;
+    }
+
+    /* Primeiro item: alinha com a primeira curva horizontal do SVG */
+    .journey-item:first-of-type {
+        margin-top: 110px !important;
+    }
+
+    .journey-item:last-child {
         margin-bottom: 0;
     }
-    
+
+    /* Todos os cards no mobile: largura de 72% para deixar 28% para a linha */
     .journey-content {
-        width: 85%;
-        padding: 30px;
-        border-radius: 30px;
-        min-height: auto;
+        width: 72%;
+        min-width: 200px;
+        padding: 22px 20px;
+        border-radius: 26px;
         height: auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
-    
+
+    /*
+     * SVG ímpar: linha curva vai para X=80 (lado ESQUERDO, 20%)
+     * Card ímpar: fica à ESQUERDA junto com a linha
+     */
+    .journey-item:nth-child(odd) {
+        justify-content: flex-start;
+    }
     .journey-item:nth-child(odd) .journey-content {
-        margin-left: auto;
-        margin-right: 0;
-    }
-    
-    .journey-item:nth-child(even) .journey-content {
+        margin-left: 12px;
         margin-right: auto;
-        margin-left: 0;
+    }
+
+    /*
+     * SVG par: linha curva vai para X=320 (lado DIREITO, 80%)
+     * Card par: fica à DIREITA junto com a linha
+     */
+    .journey-item:nth-child(even) {
+        justify-content: flex-end;
+    }
+    .journey-item:nth-child(even) .journey-content {
+        margin-right: 12px;
+        margin-left: auto;
+    }
+
+    /* Ícone pill compacto no mobile */
+    .journey-icon {
+        width: 46px;
+        height: 26px;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    .journey-content h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+        line-height: 1.3;
+    }
+
+    .journey-content p {
+        font-size: 0.85rem;
+        line-height: 1.55;
+    }
+
+    /* Botão de matrícula no mobile */
+    #journey-button-root {
+        transform: scale(0.88);
+        transform-origin: center;
     }
 }
 /* Reset mobile scaling for LiquidMetalButton - we will use responsive width in React instead */
