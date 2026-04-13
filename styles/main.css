@@ -2216,10 +2216,10 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 160px; /* Precise height for 32px padding and content */
-    margin-bottom: 90px; /* Precise rhythm: 160 + 90 = 250 units */
+    height: 250px; /* Exact match with SVG vertical units (360 -> 610 -> 860) */
+    margin-bottom: 0; /* No margin because height already covers the 250px block */
     position: relative;
-    z-index: 5; /* Keep cards on top */
+    z-index: 5;
     width: 100%;
 }
 
@@ -2232,18 +2232,28 @@ section {
 }
 
 .journey-content {
-    background: #151515; /* Solid Dark Matte as in the photo */
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    border-radius: 32px; /* Very rounded corners as in the photo */
-    width: 340px; /* Slightly wider for professional feel */
-    height: 100%;
+    background: rgba(18, 18, 18, 0.9); /* Darker, more solid matte */
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 35px; /* Refined rounding */
+    width: 380px; /* Impactful width */
+    height: auto; /* Let it grow with content! */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: left; /* Strict left alignment */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    justify-content: flex-start; /* Align content naturally from top */
+    text-align: left;
+    box-shadow: 
+        0 40px 80px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     padding: 35px;
     position: relative;
+    transition: var(--transition-v5);
+    overflow: hidden; /* Prevent text bleed */
+}
+
+.journey-content:hover {
+    border-color: rgba(212, 175, 55, 0.3);
+    transform: translateY(-5px);
 }
 
 .journey-item:nth-of-type(odd) .journey-content {
@@ -2257,18 +2267,21 @@ section {
 }
 
 .journey-icon {
-    width: 42px;
-    height: 42px;
-    background: #222;
-    border: 1.5px solid rgba(212, 175, 55, 0.3);
-    border-radius: 50%;
+    width: 56px;
+    height: 32px; /* Pill-shaped as requested/seen */
+    background: var(--grad-gold);
+    border-radius: 100px; /* Perfect pill */
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #d4af37;
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+}
+
+.journey-icon i, .journey-icon svg {
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+    color: #FFF; /* Matching the light icon look in the photo */
 }
 
 .journey-content h3 {
@@ -2309,12 +2322,16 @@ section {
     .journey-mobile { display: block !important; }
     
     .journey-item {
-        margin-bottom: 80px;
+        height: 250px; /* Keep alignment consistent with desktop SVG units */
+        margin-bottom: 0;
     }
     
     .journey-content {
-        width: 65%; /* More width for text on mobile */
-        padding: 20px 15px; /* Tighter padding */
+        width: 85%;
+        padding: 30px;
+        border-radius: 30px;
+        min-height: auto;
+        height: auto;
     }
     
     .journey-item:nth-child(odd) .journey-content {
