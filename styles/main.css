@@ -1982,13 +1982,13 @@ section {
 
 .diff-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Back to balanced columns */
-    align-items: start;
-    gap: 80px;
+    grid-template-columns: 42% 58%; /* Move o texto mais para a esquerda, dando mais margem aos balões */
+    align-items: center; /* Centraliza o bloco de texto verticalmente no grid */
+    gap: 100px; /* Aumenta a distância entre texto e imagem */
 }
 
 .diff-content {
-    text-align: left;
+    text-align: center; /* Centralizado horizontalmente conforme pedido para desktop */
 }
 
 .gold-badge {
