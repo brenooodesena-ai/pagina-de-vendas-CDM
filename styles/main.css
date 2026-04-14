@@ -1758,6 +1758,22 @@ section {
     100% { transform: translateX(calc(-280px * 16 - 20px * 16)); }
 }
 
+@media (max-width: 768px) {
+    .module-card {
+        width: 160px; /* Significantly reduced to fit ~2 covers on mobile */
+        height: 240px; /* Keep 2:3 aspect ratio properly */
+    }
+    .modules-track {
+        gap: 15px; /* Slight reduction for inner spacing */
+        animation: scroll-marquee-mobile 30s linear infinite; /* Adjusted for smaller width to run smoother */
+    }
+}
+
+@keyframes scroll-marquee-mobile {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-160px * 16 - 15px * 16)); }
+}
+
 /* --- Sales Video Section --- */
 .video-container {
     max-width: 900px;
