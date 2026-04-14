@@ -2147,7 +2147,6 @@ section {
         padding: 12px;
         transform-origin: center center;
         z-index: 10;
-        transform: none !important;
         animation: float-mobile 6s ease-in-out infinite;
     }
 
