@@ -2128,14 +2128,15 @@ section {
     
     /* MacBook: usa % relativo ao container, não vw, para não quebrar o layout da página */
     .device-mockup {
-        width: 150%; /* 150% do container = MacBook realmente grande mas clipado no overflow:hidden */
+        width: 150%;
         max-width: none;
         min-width: auto;
         transform: none;
-        margin-bottom: 0;
+        margin: 0 auto;
+        display: block;
         position: relative;
+        left: -25%; /* Compensa: (150% - 100%) / 2 = 25% para centralizar */
         z-index: 5;
-        left: 5%; /* Centraliza levemente considerando a perspectiva angled do mockup */
     }
 
     /* Balões flutuantes de tamanho legível */
