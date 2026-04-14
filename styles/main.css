@@ -1988,7 +1988,7 @@ section {
 }
 
 .diff-content {
-    text-align: center; /* Centralizado horizontalmente conforme pedido para desktop */
+    text-align: left; /* Trazendo a escrita de volta para a esquerda, conforme pedido */
 }
 
 .gold-badge {
@@ -2071,7 +2071,7 @@ section {
 
 /* Card Positions */
 .card-pos-1 { top: 5%; left: -15%; animation: float 6s ease-in-out infinite; }
-.card-pos-2 { top: 50%; right: -20%; animation: float 6s ease-in-out infinite 1s; }
+.card-pos-2 { top: 50%; right: -2%; animation: float 6s ease-in-out infinite 1s; } /* Puxado para o centro para não sair da tela */
 .card-pos-3 { bottom: 10%; left: 0%; animation: float 6s ease-in-out infinite 2s; }
 
 @keyframes float {
