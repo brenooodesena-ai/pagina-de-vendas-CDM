@@ -2125,9 +2125,10 @@ section {
     }
     
     .device-mockup {
-        width: 100%; 
-        max-width: 380px; /* Limite maior */
-        transform: scale(1.25); /* MacBook significativamente maior para o celular */
+        width: 170vw; /* Força explicitamente a imagem a ultrapassar a tela */
+        max-width: 800px; /* Impede aberrações em telas intermediárias */
+        min-width: 150vw;
+        transform: none; 
         margin-bottom: 0;
         position: relative;
         z-index: 5;
