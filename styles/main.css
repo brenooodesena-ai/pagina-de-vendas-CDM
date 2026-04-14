@@ -2126,8 +2126,8 @@ section {
     
     .device-mockup {
         width: 100%; 
-        max-width: 320px;
-        transform: none; /* Quebra a escala forçada ruim */
+        max-width: 380px; /* Limite maior */
+        transform: scale(1.25); /* MacBook significativamente maior para o celular */
         margin-bottom: 0;
         position: relative;
         z-index: 5;
