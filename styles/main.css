@@ -2070,7 +2070,7 @@ section {
 }
 
 /* Card Positions */
-.card-pos-1 { top: 5%; left: -15%; animation: float 6s ease-in-out infinite; }
+.card-pos-1 { top: 5%; left: -8%; animation: float 6s ease-in-out infinite; }
 .card-pos-2 { top: 50%; right: -2%; animation: float 6s ease-in-out infinite 1s; } /* Puxado para o centro para não sair da tela */
 .card-pos-3 { bottom: 10%; left: 0%; animation: float 6s ease-in-out infinite 2s; }
 
