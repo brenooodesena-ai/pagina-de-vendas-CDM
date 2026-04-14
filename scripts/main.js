@@ -280,4 +280,32 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', updatePathOnScroll, { passive: true });
         setTimeout(updatePathOnScroll, 100);
     }
+    
+    // --- Mobile Module Covers Center Effect ---
+    const moduleCards = document.querySelectorAll('.module-card');
+    if (moduleCards.length > 0) {
+        const updateCenterModule = () => {
+            if (window.innerWidth > 768) {
+                // Remove a classe de todos se a tela for grande (desativa no Desktop)
+                moduleCards.forEach(c => c.classList.remove('mobile-center-active'));
+                return;
+            }
+            
+            const viewportCenter = window.innerWidth / 2;
+            moduleCards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardCenter = rect.left + rect.width / 2;
+                
+                // Se o centro do card estiver a menos de 80px do centro da tela (Margem rigorosa de foco)
+                if (Math.abs(cardCenter - viewportCenter) < 80) {
+                    card.classList.add('mobile-center-active');
+                } else {
+                    card.classList.remove('mobile-center-active');
+                }
+            });
+            requestAnimationFrame(updateCenterModule);
+        };
+        requestAnimationFrame(updateCenterModule);
+    }
+
 });

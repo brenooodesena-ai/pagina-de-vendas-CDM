@@ -1767,6 +1767,13 @@ section {
         gap: 15px; /* Slight reduction for inner spacing */
         animation: scroll-marquee-mobile 30s linear infinite; /* Adjusted for smaller width to run smoother */
     }
+    
+    /* Efeito de foco ativado via JS quando a capa passa no centro da tela */
+    .module-card.mobile-center-active {
+        transform: translateY(-15px);
+        border-color: rgba(212, 175, 55, 0.5);
+        box-shadow: 0 25px 50px rgba(212, 175, 55, 0.1);
+    }
 }
 
 @keyframes scroll-marquee-mobile {
