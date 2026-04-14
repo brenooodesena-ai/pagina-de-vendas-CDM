@@ -393,7 +393,7 @@ section {
 /* Linha de Separação Padrão (Elegante) */
 .section-divider {
     width: 85%; /* Matched with other lines */
-    margin: 60px auto; /* Aumentado o respiro vertical dessa linha */
+    margin: 100px auto 60px; /* Aumentada a margem do topo (100px) para descer a linha um pouco mais */
     height: 2px;
     background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
 }
