@@ -2113,7 +2113,7 @@ section {
         text-align: center;
     }
     
-    /* Container principal com overflow:hidden para clipar a imagem grande do lado direito */
+    /* Container principal - clip apenas horizontal para nao cortar animacao vertical dos balaozinhos */
     .diff-visual {
         min-height: auto;
         padding: 60px 0 80px;
@@ -2123,10 +2123,11 @@ section {
         justify-content: center;
         position: relative;
         margin-top: 10px;
-        overflow: hidden; /* Clipa as bordas transparentes da imagem que ultrapassam */
+        overflow-x: clip; /* Clipa apenas a horizontal, sem bloquear o float vertical dos baloes */
+        overflow-y: visible;
     }
     
-    /* MacBook: usa % relativo ao container, não vw, para não quebrar o layout da página */
+    /* MacBook: usa % relativo ao container, nao vw, para nao quebrar o layout da pagina */
     .device-mockup {
         width: 150%;
         max-width: none;
@@ -2137,6 +2138,7 @@ section {
         position: relative;
         left: -25%; /* Compensa: (150% - 100%) / 2 = 25% para centralizar */
         z-index: 5;
+        filter: none; /* Remove a sombra drop-shadow visivel embaixo do MacBook */
     }
 
     /* Balões flutuantes de tamanho legível */
