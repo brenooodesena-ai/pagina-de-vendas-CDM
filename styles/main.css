@@ -2105,7 +2105,7 @@ section {
 @media (max-width: 992px) {
     .diff-grid {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: 20px; /* Reduz a folga enorme vista no print */
         text-align: center;
     }
     
@@ -2114,58 +2114,60 @@ section {
     }
     
     .diff-visual {
-        min-height: 480px; /* Force height to contain absolute floating cards */
+        min-height: auto; /* Permite que o conteúdo determine o tamanho final real e remove o buraco */
+        padding: 50px 0; /* Cria um "espaço aéreo" para os balões trafegarem ao redor do macbook sem sair da div */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         position: relative;
-        gap: 0;
-        margin-top: 40px;
+        margin-top: 10px;
     }
     
     .device-mockup {
-        transform: scale(1.05); /* Slightly less zoom on mobile to avoid cutoffs */
-        margin-bottom: 30px;
+        width: 100%; 
+        max-width: 320px;
+        transform: none; /* Quebra a escala forçada ruim */
+        margin-bottom: 0;
+        position: relative;
+        z-index: 5;
     }
 
-    /* Re-enable and scale floating cards on mobile */
+    /* Redefinido o tamanho e resetado as escalas defeituosas parasita */
     .floating-offer-card {
         position: absolute;
-        width: 260px; /* Slightly narrower for mobile base */
+        width: 220px; /* Largura sólida para ler bem no mobile */
         max-width: none;
-        padding: 15px;
+        padding: 12px;
         transform-origin: center center;
         z-index: 10;
+        transform: none !important; /* Desabilita scale() bagunçados injetados via inline ou pseudo-rules */
         animation: float-mobile 6s ease-in-out infinite;
     }
 
-    .floating-offer-card .card-label { font-size: 0.65rem; margin-bottom: 5px; }
+    .floating-offer-card .card-label { font-size: 0.65rem; margin-bottom: 4px; }
     .floating-offer-card .card-text { font-size: 0.75rem; line-height: 1.3; }
 
-    /* Fine-tuned positions to surround MacBook on mobile screens */
+    /* Posicionamento orbital natural adaptado para tamanhos de tela mobile, colado as bordas relativas da .diff-visual */
     .floating-offer-card.card-pos-1 { 
-        top: 0%; 
-        left: -8%; 
-        transform: scale(0.65);
+        top: 0px; 
+        left: 5%; 
         animation-delay: 0s;
     }
     .floating-offer-card.card-pos-2 { 
         top: 45%; 
-        right: -12%; 
-        transform: scale(0.65);
+        right: 0%; 
         animation-delay: 1s;
     }
     .floating-offer-card.card-pos-3 { 
-        bottom: 0%; 
-        left: -10%; 
-        transform: scale(0.65);
+        bottom: 0px; 
+        left: 5%; 
         animation-delay: 2s;
     }
 
     @keyframes float-mobile {
-        0%, 100% { transform: scale(0.65) translateY(0); }
-        50% { transform: scale(0.65) translateY(-10px); }
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
     }
 }
 
