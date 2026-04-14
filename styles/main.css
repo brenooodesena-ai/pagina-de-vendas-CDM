@@ -2158,9 +2158,7 @@ section {
 /* --- Hero Scroll Indicator --- */
 .hero-scroll-indicator {
     position: relative;
-    width: 100vw;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 100%;
     margin-top: 80px;
     height: 60px;
 }
