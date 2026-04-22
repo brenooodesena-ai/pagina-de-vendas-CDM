@@ -281,31 +281,52 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(updatePathOnScroll, 100);
     }
     
-    // --- Mobile Module Covers Center Effect ---
+    // --- Mobile Module Covers Center Effect (Performance-optimized) ---
+    // ANTES: loop infinito de requestAnimationFrame bloqueava a thread 60x/seg
+    // AGORA: só roda quando a seção está visível E o usuário está rolando
     const moduleCards = document.querySelectorAll('.module-card');
-    if (moduleCards.length > 0) {
+    const modulesSection = document.querySelector('#modules-v5');
+
+    if (moduleCards.length > 0 && modulesSection) {
+        let isSectionVisible = false;
+        let ticking = false;
+
         const updateCenterModule = () => {
-            if (window.innerWidth > 768) {
-                // Remove a classe de todos se a tela for grande (desativa no Desktop)
-                moduleCards.forEach(c => c.classList.remove('mobile-center-active'));
-                return;
-            }
-            
+            if (!isSectionVisible || window.innerWidth > 768) return;
             const viewportCenter = window.innerWidth / 2;
             moduleCards.forEach(card => {
                 const rect = card.getBoundingClientRect();
                 const cardCenter = rect.left + rect.width / 2;
-                
-                // Se o centro do card estiver a menos de 80px do centro da tela (Margem rigorosa de foco)
                 if (Math.abs(cardCenter - viewportCenter) < 80) {
                     card.classList.add('mobile-center-active');
                 } else {
                     card.classList.remove('mobile-center-active');
                 }
             });
-            requestAnimationFrame(updateCenterModule);
         };
-        requestAnimationFrame(updateCenterModule);
+
+        // Apenas observa quando a seção entra/sai da tela
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                isSectionVisible = entry.isIntersecting;
+                if (!isSectionVisible) {
+                    moduleCards.forEach(c => c.classList.remove('mobile-center-active'));
+                }
+            });
+        }, { threshold: 0 });
+
+        sectionObserver.observe(modulesSection);
+
+        // Throttled scroll: só executa 1 vez por frame de animação
+        window.addEventListener('scroll', () => {
+            if (!ticking && isSectionVisible && window.innerWidth <= 768) {
+                requestAnimationFrame(() => {
+                    updateCenterModule();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
     }
 
 });

@@ -87,8 +87,18 @@ body {
 
 /* Optimize blur performance on mobile */
 @media (max-width: 768px) {
+    /* Desliga luzes ambiente pesadas — filter:blur(100-150px) cria camadas GPU enormes */
     .ambient-light {
-        filter: blur(80px); /* Reduced blur for mobile GPU */
+        display: none !important;
+    }
+
+    /* Remove backdrop-filter globalmente no mobile — 7 instâncias simultâneas travavam o Moto G15 */
+    /* Todos os elementos que usam backdrop-filter recebem fundo sólido equivalente */
+    *,
+    *::before,
+    *::after {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
     }
 }
 
