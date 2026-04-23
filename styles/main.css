@@ -57,19 +57,7 @@ body {
     letter-spacing: var(--ls-compact);
     overflow-x: hidden;
     max-width: 100%;
-    overscroll-behavior-y: none; /* Prevents bounce at ends */
     text-rendering: optimizeSpeed;
-}
-
-/* Performance Optimization: Skip rendering of off-screen sections */
-#journey-v5, 
-#differentiators-v5, 
-#modules-v5, 
-#about-v5, 
-#access-v5, 
-#faq-v5 {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 1000px; /* placeholder size to prevent scrollbar jumping */
 }
 
 .fixed-bg-grid {
@@ -100,8 +88,11 @@ body {
 /* Optimize blur performance on mobile */
 @media (max-width: 768px) {
     /* Desliga luzes ambiente pesadas — filter:blur(100-150px) cria camadas GPU enormes */
-    .ambient-light {
+    .ambient-light,
+    .button-ambient-glow {
         display: none !important;
+        animation: none !important;
+        filter: none !important;
     }
 
     /* Remove backdrop-filter globalmente no mobile — 7 instâncias simultâneas travavam o Moto G15 */
@@ -154,6 +145,12 @@ body {
     height: 50vh;
     transform: translateY(-50%);
     opacity: 0.5;
+}
+
+.button-ambient-glow {
+    filter: blur(120px);
+    animation: glow-breath 10s ease-in-out infinite;
+    will-change: opacity;
 }
 
 

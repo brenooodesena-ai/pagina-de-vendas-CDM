@@ -277,7 +277,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (mobilePath) mobilePath.style.strokeDashoffset = 100 * (1 - progress);
         };
 
-        window.addEventListener('scroll', updatePathOnScroll, { passive: true });
+        let tickingPath = false;
+        const boundedUpdatePathOnScroll = () => {
+            if (!tickingPath) {
+                requestAnimationFrame(() => {
+                    updatePathOnScroll();
+                    tickingPath = false;
+                });
+                tickingPath = true;
+            }
+        };
+
+        window.addEventListener('scroll', boundedUpdatePathOnScroll, { passive: true });
         setTimeout(updatePathOnScroll, 100);
     }
     
@@ -294,13 +305,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const updateCenterModule = () => {
             if (!isSectionVisible || window.innerWidth > 768) return;
             const viewportCenter = window.innerWidth / 2;
-            moduleCards.forEach(card => {
+            
+            // FASE DE LEITURA (Evita Layout Thrashing)
+            const cardsData = Array.from(moduleCards).map(card => {
                 const rect = card.getBoundingClientRect();
-                const cardCenter = rect.left + rect.width / 2;
-                if (Math.abs(cardCenter - viewportCenter) < 80) {
-                    card.classList.add('mobile-center-active');
+                return {
+                    card,
+                    isActive: Math.abs((rect.left + rect.width / 2) - viewportCenter) < 80
+                };
+            });
+
+            // FASE DE ESCRITA
+            cardsData.forEach(data => {
+                if (data.isActive) {
+                    if (!data.card.classList.contains('mobile-center-active')) data.card.classList.add('mobile-center-active');
                 } else {
-                    card.classList.remove('mobile-center-active');
+                    if (data.card.classList.contains('mobile-center-active')) data.card.classList.remove('mobile-center-active');
                 }
             });
         };

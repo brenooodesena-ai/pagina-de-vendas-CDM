@@ -5,6 +5,25 @@ import { Sparkles } from "lucide-react";
 import * as React from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
+// Hook para detectar visibilidade
+function useIntersectionObserver(
+  ref: React.RefObject<Element>,
+  options: IntersectionObserverInit = { threshold: 0 }
+) {
+  const [isIntersecting, setIsIntersecting] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsIntersecting(entry.isIntersecting);
+    }, options);
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [ref, options]);
+
+  return isIntersecting;
+}
+
 interface LiquidMetalButtonProps {
   label?: string;
   onClick?: () => void;
@@ -53,6 +72,19 @@ export function LiquidMetalButton({
       };
     }
   }, [viewMode, width]);
+
+  const isVisible = useIntersectionObserver(shaderRef);
+
+  useEffect(() => {
+    // If not visible, we can try to pause or slow down the shader
+    if (shaderMount.current?.setSpeed) {
+      if (!isVisible) {
+        shaderMount.current.setSpeed(0); // Pause shader on mobile to save GPU
+      } else {
+        shaderMount.current.setSpeed(isHovered ? 1 : 0.6);
+      }
+    }
+  }, [isVisible, isHovered]);
 
   useEffect(() => {
     const styleId = "shader-canvas-style-exploded";
@@ -137,13 +169,13 @@ export function LiquidMetalButton({
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    shaderMount.current?.setSpeed?.(1);
+    if (isVisible) shaderMount.current?.setSpeed?.(1);
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
     setIsPressed(false);
-    shaderMount.current?.setSpeed?.(0.6);
+    if (isVisible) shaderMount.current?.setSpeed?.(0.6);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -182,18 +214,17 @@ export function LiquidMetalButton({
       <div>
         {/* Subtle Ambient Glow - NO MARKS GUARANTEED */}
         <div 
+          className="button-ambient-glow"
           style={{
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: `${dimensions.width * 1.6}px`, // Reduced from 2.5x to prevent margin clipping
-            height: `${dimensions.height * 4.5}px`, // High enough for full diffusion
+            width: `${dimensions.width * 1.6}px`, 
+            height: `${dimensions.height * 4.5}px`, 
             background: "radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 25%, transparent 60%)",
             zIndex: 0,
             pointerEvents: "none",
-            filter: "blur(120px)", // Significantly increased for ultra-soft edges
-            animation: "glow-breath 10s ease-in-out infinite",
           }}
         />
         <div
